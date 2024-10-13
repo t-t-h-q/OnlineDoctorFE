@@ -3,7 +3,7 @@ import { AUTH_PATIENT_COOKIE_NAME } from '../constants/auth'
 
 const authenticatedPatientLoader = async () => {
   // TODO: add isPatientAuthenticated to the router
-  const isPatientAuthenticated = !document.cookie.includes(AUTH_PATIENT_COOKIE_NAME)
+  const isPatientAuthenticated = document.cookie.includes(AUTH_PATIENT_COOKIE_NAME)
   if (!isPatientAuthenticated) {
     return redirect('/login')
   }
@@ -14,7 +14,7 @@ const authenticatedPatientLoader = async () => {
 const patientRoutes = [
   {
     path: '/patients',
-    loadder: authenticatedPatientLoader,
+    loader: authenticatedPatientLoader,
     async lazy() {
       const PatientLayout = await import('../layouts/PatientLayout')
       return { Component: PatientLayout.default }

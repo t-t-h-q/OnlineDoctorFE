@@ -62,7 +62,7 @@ const doctorRoutes = [
         },
       },
       {
-        path: 'setings',
+        path: 'settings',
         async lazy() {
           const DoctorSettings = await import('../pages/doctors/Settings')
           return { Component: DoctorSettings.default }
