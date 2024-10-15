@@ -1,17 +1,10 @@
-import { useState } from 'react'
-
-import { Button } from 'antd'
+import './App.css'
+import router from './routers'
+import Loading from './components/commons/Loading'
+import { RouterProvider } from 'react-router-dom'
 
 function App() {
-  const [count, setCount] = useState(0)
-  const onClick = () => setCount((count) => count + 1)
-  return (
-    <div className='flex items-center justify-center h-full'>
-      <Button type='primary' className='mt-10 btn' onClick={onClick}>
-        count is {count}
-      </Button>
-    </div>
-  )
+  return <RouterProvider router={router} fallbackElement={<Loading />} />
 }
 
 export default App

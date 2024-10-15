@@ -13,17 +13,19 @@
     "prettier:fix": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "preview": "vite preview",
     "prepare": "husky",
-    "check:all": "yarn prettier && yarn lint && yarn check:type"
+    "check:all": "pnpm prettier:fix && pnpm lint && pnpm check:type"
   },
   "dependencies": {
     "antd": "^5.21.3",
     "normalize.css": "^8.0.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.27.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-conventional": "^19.5.0",
+    "@commitlint/types": "^19.5.0",
     "@eslint/js": "^9.11.1",
     "@types/eslint__js": "^8.42.3",
     "@types/node": "^22.7.5",
