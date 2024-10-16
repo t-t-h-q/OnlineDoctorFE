@@ -1,29 +1,9 @@
-import { useAppSelector, useAppDispatch } from 'store/hooks'
-import { increment, decrement, incrementByAmount } from 'store/exampleSlice'
-import { Button } from 'antd'
-import { useGetPostsQuery } from 'services/api'
+import router from './routers'
+import Loading from './components/commons/Loading'
+import { RouterProvider } from 'react-router-dom'
 
 function App() {
-  const { data: posts, error, isLoading } = useGetPostsQuery()
-  const count = useAppSelector((state) => state.example?.value ?? 0)
-  const dispatch = useAppDispatch()
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>An error occurred</div>
-  return (
-    <div className='flex items-center justify-center h-full'>
-      <Button type='primary' className='mt-10 btn' onClick={() => dispatch(decrement())}>
-        -
-      </Button>
-      <span>{count}</span>
-      <Button type='primary' className='mt-10 btn' onClick={() => dispatch(increment())}>
-        +
-      </Button>
-      <Button type='primary' className='mt-10 btn' onClick={() => dispatch(incrementByAmount(5))}>
-        +5
-      </Button>
-      <ul>{posts?.map((post) => <li key={post.id}>{post.title}</li>)}</ul>
-    </div>
-  )
+  return <RouterProvider router={router} fallbackElement={<Loading />} />
 }
 
 export default App
