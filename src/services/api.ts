@@ -1,4 +1,5 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react'
+import { baseQuery } from 'services/base'
 
 interface Post {
   id: number
@@ -13,7 +14,7 @@ interface Post {
 
 export const postsApi = createApi({
   reducerPath: 'postsApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://jsonplaceholder.typicode.com' }),
+  baseQuery: baseQuery,
   endpoints: (builder) => ({
     getPosts: builder.query<Post[], void>({
       query: () => 'posts',
