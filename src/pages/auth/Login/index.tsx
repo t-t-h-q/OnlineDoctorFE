@@ -60,7 +60,7 @@ const Login: React.FC = () => {
             {
               required: true,
               message: 'Please input your password!',
-            }
+            },
           ]}
         >
           <Input.Password placeholder='password' />
