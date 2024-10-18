@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       {
         path: 'login',
         async lazy() {
-          const PageLogin = await import('../pages/Login')
+          const PageLogin = await import('../pages/auth/Login')
           return { Component: PageLogin.default }
         },
       },
