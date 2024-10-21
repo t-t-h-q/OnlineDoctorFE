@@ -15,14 +15,14 @@ interface Post {
 export const postsApi = createApi({
   reducerPath: 'postsApi',
   baseQuery: baseQuery,
+  tagTypes: ['Post'],
+  keepUnusedDataFor: 5,
   endpoints: (builder) => ({
     getPosts: builder.query<Post[], void>({
       query: () => 'posts',
-    }),
-    getPostById: builder.query<Post, number>({
-      query: (id) => `posts/${id}`,
+      providesTags: ['Post'],
     }),
   }),
 })
 
-export const { useGetPostsQuery, useGetPostByIdQuery } = postsApi
+export const { useGetPostsQuery } = postsApi
