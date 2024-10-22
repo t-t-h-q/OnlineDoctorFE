@@ -1,6 +1,7 @@
 import { postsApi } from '@/services/api'
 import { combineReducers } from 'redux'
-import exampleReducer from 'store/exampleSlice'
+import counterReducer from '@/store/counterSlice'
+import postsReducer from 'store/postsSlice'
 
 /**
  * Combines multiple reducers into a single reducer function.
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   [postsApi.reducerPath]: postsApi.reducer,
 
   // reducers
-  example: exampleReducer,
+  counter: counterReducer,
+  posts: postsReducer,
 })
 
 export default rootReducer

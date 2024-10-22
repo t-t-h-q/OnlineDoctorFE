@@ -1,11 +1,7 @@
+import { CacheTimes } from 'enums/cacheTimes'
+import { Post } from 'models/post'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { baseQuery } from 'services/base'
-
-interface Post {
-  id: number
-  title: string
-  body: string
-}
 
 /**
  * Creates an API instance using Redux Toolkit's createApi function.
@@ -16,7 +12,7 @@ export const postsApi = createApi({
   reducerPath: 'postsApi',
   baseQuery: baseQuery,
   tagTypes: ['Post'],
-  keepUnusedDataFor: 5,
+  keepUnusedDataFor: CacheTimes.SHORT,
   endpoints: (builder) => ({
     getPosts: builder.query<Post[], void>({
       query: () => 'posts',
