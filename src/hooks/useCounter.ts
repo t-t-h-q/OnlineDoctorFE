@@ -1,5 +1,5 @@
 import { useAppSelector, useAppDispatch } from 'store/hooks'
-import { increment, decrement, incrementByAmount } from '@/store/counterSlice'
+import { increment, decrement, incrementByAmount } from 'store/counterSlice'
 
 export const useCounter = () => {
   const count = useAppSelector((state) => state.counter?.value ?? 0)
