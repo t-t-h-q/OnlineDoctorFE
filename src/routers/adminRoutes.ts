@@ -1,10 +1,14 @@
 import { redirect } from 'react-router-dom'
-import { AUTH_ADMIN_COOKIE_NAME } from '../constants/auth'
-import { COMMON_PATHS } from '../constants/routeNames'
+import { get } from 'lodash'
+import { COMMON_PATHS } from '@/constants/routeNames'
+import store from '@/store'
+import { ERoles } from '@/enums/role'
 
 const authenticatedAdminLoader = async () => {
-  // TODO: add authenticatedDoctorLoader to the router
-  const isAdminAuthenticated = document.cookie.includes(AUTH_ADMIN_COOKIE_NAME)
+  const storeApp = store.getState()
+  const roleId = get(storeApp, 'auth.currentUser.role.id', null)
+  const isAdminAuthenticated = ERoles.ADMIN === roleId
+
   if (!isAdminAuthenticated) {
     return redirect(COMMON_PATHS.LOGIN.admin)
   }

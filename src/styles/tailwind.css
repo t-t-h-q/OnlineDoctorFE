@@ -6,6 +6,11 @@
   body {
     @apply bg-white dark:bg-[#000] text-black dark:text-[#f5f5f5];
   }
+
+  .auth-wrapper {
+    @apply bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
+      flex items-center justify-center flex-1 p-4
+  }
 }
 
 @layer components {}
