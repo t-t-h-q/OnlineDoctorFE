@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { baseQuery } from 'services/base'
+import { customBaseQuery } from 'services/base'
 
 interface Post {
   id: number
@@ -14,7 +14,7 @@ interface Post {
 
 export const postsApi = createApi({
   reducerPath: 'postsApi',
-  baseQuery: baseQuery,
+  baseQuery: customBaseQuery,
   tagTypes: ['Post'],
   keepUnusedDataFor: 5,
   endpoints: (builder) => ({

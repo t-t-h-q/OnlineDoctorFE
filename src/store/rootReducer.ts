@@ -1,6 +1,12 @@
-import { postsApi } from '@/services/api'
 import { combineReducers } from 'redux'
-import exampleReducer from 'store/exampleSlice'
+// import exampleReducer from 'store/exampleSlice'
+
+//  services
+// import { postsApi } from '@/services/api'
+import { authApi } from '@/services/auth'
+
+//  reducers
+import authReducer from '@/store/auth'
 
 /**
  * Combines multiple reducers into a single reducer function.
@@ -11,10 +17,12 @@ import exampleReducer from 'store/exampleSlice'
 
 const rootReducer = combineReducers({
   // services
-  [postsApi.reducerPath]: postsApi.reducer,
-
+  // [postsApi.reducerPath]: postsApi.reducer,
+  [authApi.reducerPath]: authApi.reducer,
+  
   // reducers
-  example: exampleReducer,
+  // example: exampleReducer,
+  auth: authReducer,
 })
 
 export default rootReducer
