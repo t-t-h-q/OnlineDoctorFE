@@ -24,12 +24,7 @@ const Login: React.FC = () => {
 
   return (
     <AuthLayout>
-      <Form
-        name='basic'
-        onFinish={onFinish}
-        autoComplete='off'
-        layout='vertical'
-      >
+      <Form name='basic' onFinish={onFinish} autoComplete='off' layout='vertical'>
         <h1 className='text-3xl font-bold mb-5 text-center'>Login</h1>
         <Form.Item<ILoginForm>
           label='Email'

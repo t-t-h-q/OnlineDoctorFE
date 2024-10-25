@@ -1,4 +1,4 @@
-import { ERoles } from "@/enums/role"
+import { ERoles } from '@/enums/role'
 import { ADMIN_ROUTES, DOCTOR_PATHS, PATIENT_PATHS } from '@/constants/routeNames'
 
 export const getRolePath = (roleName: string) => {

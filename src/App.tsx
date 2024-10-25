@@ -13,7 +13,7 @@ function App() {
 
   useEffect(() => {
     if (isHasProfile) return
-    (async () => {
+    ;(async () => {
       await fetchProfile()
     })()
     // eslint-disable-next-line react-hooks/exhaustive-deps

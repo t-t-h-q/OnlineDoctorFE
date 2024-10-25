@@ -1,4 +1,4 @@
-import RegisterForm from "@/pages/auth/RegisterForm"
+import RegisterForm from '@/pages/auth/RegisterForm'
 
 export const Registration = () => {
   return <RegisterForm isDoctor />
