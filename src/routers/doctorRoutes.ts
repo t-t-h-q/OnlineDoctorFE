@@ -5,8 +5,8 @@ import store from '@/store'
 
 const authenticatedDoctorLoader = async () => {
   const storeApp = store.getState()
-  const roleId = get(storeApp, 'auth.currentUser.role.id', null)
-  const isDoctorAuthenticated = ERoles.DOCTOR === roleId
+  const roleName = get(storeApp, 'auth.currentUser.role.name', null)
+  const isDoctorAuthenticated = ERoles.DOCTOR === roleName
 
   if (!isDoctorAuthenticated) {
     return redirect('/login')

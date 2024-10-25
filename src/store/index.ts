@@ -14,10 +14,11 @@ import rootReducer from './rootReducer'
 
 const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware()
-  .concat(logger)
-  // .concat(postsApi.middleware)
-  .concat(authApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware()
+      .concat(logger)
+      // .concat(postsApi.middleware)
+      .concat(authApi.middleware),
 })
 
 export type RootState = ReturnType<typeof rootReducer>

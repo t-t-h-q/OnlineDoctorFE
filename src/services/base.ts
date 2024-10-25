@@ -15,7 +15,7 @@ import { toast } from 'react-toastify'
 import { ERROR_MESSAGES } from '@/constants/errorMessages'
 
 export const baseQuery = fetchBaseQuery({
-  baseUrl: import.meta.env.VITE_API_ENDPOINT,
+  baseUrl: import.meta.env.VITE_API_URL,
   prepareHeaders: (headers) => {
     const accessToken = StorageService.get(STORAGE_KEYS.AUTH_PROFILE)?.accessToken
 

@@ -1,6 +1,7 @@
-import { 
-  // useAppSelector, 
-  useAppDispatch } from 'store/hooks'
+import {
+  // useAppSelector,
+  useAppDispatch,
+} from 'store/hooks'
 import { increment, decrement, incrementByAmount } from 'store/exampleSlice'
 import { Button } from 'antd'
 // import { useGetPostsQuery } from 'services/api'

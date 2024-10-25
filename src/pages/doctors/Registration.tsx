@@ -1,5 +1,7 @@
+import RegisterForm from "@/pages/auth/RegisterForm"
+
 export const Registration = () => {
-  return <div>DoctorRegistration</div>
+  return <RegisterForm isDoctor />
 }
 
 export default Registration

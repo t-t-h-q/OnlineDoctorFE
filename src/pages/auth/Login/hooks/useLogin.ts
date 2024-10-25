@@ -4,8 +4,7 @@ import { useLoginMutation } from '@/services/auth'
 import { ILoginRequest } from '@/interfaces/auth'
 import { STORAGE_KEYS } from '@/constants/storageKeys'
 import StorageService from '@/services/localStorage'
-import { ERoles } from '@/enums/role'
-import { ADMIN_ROUTES, DOCTOR_PATHS, PATIENT_PATHS } from '@/constants/routeNames'
+import { getRolePath } from '@/utils/rolePath'
 
 const useLogin = () => {
   const navigate = useNavigate()
@@ -22,20 +21,8 @@ const useLogin = () => {
       const { role } = data.user
       if (!role) return
 
-      switch (role.id) {
-        case ERoles.ADMIN:
-          navigate(ADMIN_ROUTES.BASE_PATH)
-          break
-        case ERoles.DOCTOR:
-          navigate(DOCTOR_PATHS.BASE)
-          break
-        case ERoles.PATIENT:
-          navigate(PATIENT_PATHS.BASE)
-          break
-        default:
-          navigate('/')
-          break
-      }
+      const pathToRedirect = getRolePath(role.name)
+      navigate(pathToRedirect)
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log('Login error:', error)

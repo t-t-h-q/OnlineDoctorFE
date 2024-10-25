@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
   // services
   // [postsApi.reducerPath]: postsApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
-  
+
   // reducers
   // example: exampleReducer,
   auth: authReducer,

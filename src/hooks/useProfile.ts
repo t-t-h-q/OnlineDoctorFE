@@ -10,7 +10,7 @@ const useProfile = () => {
     if (!tokens) return
 
     try {
-      await getProfile()
+      await getProfile().unwrap()
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log('Fetch profile error:', error)

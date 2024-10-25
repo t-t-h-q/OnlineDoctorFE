@@ -6,8 +6,8 @@ import { ERoles } from '@/enums/role'
 
 const authenticatedAdminLoader = async () => {
   const storeApp = store.getState()
-  const roleId = get(storeApp, 'auth.currentUser.role.id', null)
-  const isAdminAuthenticated = ERoles.ADMIN === roleId
+  const roleName = get(storeApp, 'auth.currentUser.role.name', null)
+  const isAdminAuthenticated = ERoles.ADMIN === roleName
 
   if (!isAdminAuthenticated) {
     return redirect(COMMON_PATHS.LOGIN.admin)

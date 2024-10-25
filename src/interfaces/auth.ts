@@ -27,10 +27,9 @@ export interface IRegisterRequest {
   password: string
   firstName: string
   lastName: string
-  role?: {
-    id: string
-  }
-  status?: {
-    id: string
-  }
+  role?:  string
+  status?:  string
+  phone?: string
+  specialty?: string
+  license?: string
 }
