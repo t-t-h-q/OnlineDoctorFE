@@ -8,7 +8,7 @@ const authenticatedDoctorLoader = async () => {
   const roleName = get(storeApp, 'auth.currentUser.role.name', null)
   const isDoctorAuthenticated = ERoles.DOCTOR === roleName
 
-  if (!isDoctorAuthenticated) {
+  if (isDoctorAuthenticated) {
     return redirect('/login')
   }
 
@@ -32,9 +32,9 @@ const doctorRoutes = [
         },
       },
       {
-        path: 'detail',
+        path: 'detail/:id',
         async lazy() {
-          const DoctorRegistration = await import('../pages/doctors/Detail')
+          const DoctorRegistration = await import('../pages/doctors/Detail/index')
           return { Component: DoctorRegistration.default }
         },
       },
