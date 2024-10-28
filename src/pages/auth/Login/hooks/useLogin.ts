@@ -39,7 +39,7 @@ const useLogin = () => {
       const pathToRedirect = getRolePath(currentUser.role.name)
       navigate(pathToRedirect)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser])
 
   return {
