@@ -7,6 +7,8 @@ import { authApi } from '@/services/auth'
 
 //  reducers
 import authReducer from '@/store/auth'
+import counterReducer from '@/store/counterSlice'
+import postsReducer from 'store/postsSlice'
 
 /**
  * Combines multiple reducers into a single reducer function.
@@ -23,6 +25,8 @@ const rootReducer = combineReducers({
   // reducers
   // example: exampleReducer,
   auth: authReducer,
+  counter: counterReducer,
+  posts: postsReducer,
 })
 
 export default rootReducer

@@ -1,3 +1,4 @@
+// import { Post } from 'models/post'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { customBaseQuery } from 'services/base'
 
@@ -6,6 +7,7 @@ interface Post {
   title: string
   body: string
 }
+import { CATCH_TIME_SECONDS } from 'constants/time'
 
 /**
  * Creates an API instance using Redux Toolkit's createApi function.
@@ -16,7 +18,7 @@ export const postsApi = createApi({
   reducerPath: 'postsApi',
   baseQuery: customBaseQuery,
   tagTypes: ['Post'],
-  keepUnusedDataFor: 5,
+  keepUnusedDataFor: CATCH_TIME_SECONDS,
   endpoints: (builder) => ({
     getPosts: builder.query<Post[], void>({
       query: () => 'posts',

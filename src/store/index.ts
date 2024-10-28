@@ -1,3 +1,4 @@
+import { postsApi } from 'services/api'
 import { configureStore } from '@reduxjs/toolkit'
 import logger from 'redux-logger'
 
