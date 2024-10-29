@@ -17,9 +17,10 @@ import { ERROR_MESSAGES } from '@/constants/errorMessages'
 export const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_URL,
   prepareHeaders: (headers) => {
+    const authorization = headers.get('Authorization');
     const accessToken = StorageService.get(STORAGE_KEYS.AUTH_PROFILE)?.accessToken
 
-    if (accessToken) {
+    if (!authorization && accessToken) {
       headers.set('Authorization', `Bearer ${accessToken}`)
     }
     return headers
@@ -27,13 +28,9 @@ export const baseQuery = fetchBaseQuery({
 })
 
 export const customBaseQuery: BaseQueryFn = async (args, api, extraOptions) => {
-  const argsCustom = args
-  const ACCESS_TOKEN_EXPIRED = 'Unauthorized' // TODO: get from error code
+  let result = await baseQuery(args, api, extraOptions)
 
-  let result = await baseQuery(argsCustom, api, extraOptions)
-
-  // FIXME: check error refresh token
-  if (get(result, 'error.status') === 401 && get(result, 'error.data.message') === ACCESS_TOKEN_EXPIRED) {
+  if (get(result, 'error.status') === 401) {
     try {
       const tokens = StorageService.get(STORAGE_KEYS.AUTH_PROFILE) || {}
 
@@ -41,11 +38,9 @@ export const customBaseQuery: BaseQueryFn = async (args, api, extraOptions) => {
         {
           url: '/auth/refresh',
           method: 'POST',
-          body: {
-            token: tokens.accessToken,
-            refreshToken: tokens.refreshToken,
-            tokenExpires: tokens.tokenExpires,
-          },
+          headers: {
+            'authorization': `Bearer ${tokens.refreshToken}`,
+          }
         },
         api,
         extraOptions,
@@ -53,7 +48,9 @@ export const customBaseQuery: BaseQueryFn = async (args, api, extraOptions) => {
 
       if (refreshResult.data) {
         // get new tokens
-        const tokens = get(refreshResult, 'data.result.data', {})
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const data: any = get(refreshResult, 'data', {})
+        const tokens = { accessToken: data.token, refreshToken: data.refreshToken, tokenExpires: data.tokenExpires }
         StorageService.set(STORAGE_KEYS.AUTH_PROFILE, tokens)
 
         // retry original query
