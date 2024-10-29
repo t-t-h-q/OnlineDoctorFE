@@ -17,7 +17,7 @@ import { ERROR_MESSAGES } from '@/constants/errorMessages'
 export const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_URL,
   prepareHeaders: (headers) => {
-    const authorization = headers.get('Authorization');
+    const authorization = headers.get('Authorization')
     const accessToken = StorageService.get(STORAGE_KEYS.AUTH_PROFILE)?.accessToken
 
     if (!authorization && accessToken) {
@@ -39,8 +39,8 @@ export const customBaseQuery: BaseQueryFn = async (args, api, extraOptions) => {
           url: '/auth/refresh',
           method: 'POST',
           headers: {
-            'authorization': `Bearer ${tokens.refreshToken}`,
-          }
+            Authorization: `Bearer ${tokens.refreshToken}`,
+          },
         },
         api,
         extraOptions,
