@@ -28,14 +28,12 @@ export const baseQuery = fetchBaseQuery({
 
 export const customBaseQuery: BaseQueryFn = async (args, api, extraOptions) => {
   const argsCustom = args
+  const ACCESS_TOKEN_EXPIRED = 'Unauthorized' // TODO: get from error code
 
   let result = await baseQuery(argsCustom, api, extraOptions)
 
   // FIXME: check error refresh token
-  if (
-    get(result, 'error.status') === 401 &&
-    get(result, 'error.data?.error?.code') === 'ERROR_CODE.AUTH.ACCESS_TOKEN_EXPIRED'
-  ) {
+  if (get(result, 'error.status') === 401 && get(result, 'error.data.message') === ACCESS_TOKEN_EXPIRED) {
     try {
       const tokens = StorageService.get(STORAGE_KEYS.AUTH_PROFILE) || {}
 
@@ -63,8 +61,9 @@ export const customBaseQuery: BaseQueryFn = async (args, api, extraOptions) => {
       } else {
         handleNotification(api, result)
       }
-    } finally {
-      //..
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log('Refresh token error:', error)
     }
   }
   // show notification and redirect

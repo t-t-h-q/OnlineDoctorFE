@@ -2,12 +2,13 @@ import { ILoginRequest, ILoginResponse, IRegisterRequest } from '@/interfaces/au
 import { customBaseQuery } from '@/services/base'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { IUser } from '@/interfaces/user'
+import { CATCH_TIME_SECONDS } from '@/constants/time'
 
 export const authApi = createApi({
   baseQuery: customBaseQuery,
   reducerPath: 'authApi',
   tagTypes: ['Auth'],
-
+  keepUnusedDataFor: CATCH_TIME_SECONDS,
   endpoints: (builder) => ({
     login: builder.mutation<ILoginResponse, ILoginRequest>({
       query: (credentials) => ({
@@ -29,7 +30,7 @@ export const authApi = createApi({
     logout: builder.mutation<unknown, void>({
       query: () => ({
         url: 'auth/logout',
-        method: 'DELETE',
+        method: 'POST',
         invalidatesTags: ['Auth'],
       }),
     }),

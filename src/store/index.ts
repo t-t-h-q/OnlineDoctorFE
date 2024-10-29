@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit'
-import logger from 'redux-logger'
 
 // import { postsApi } from '@/services/api'
 import { authApi } from '@/services/auth'
@@ -16,7 +15,6 @@ const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-      .concat(logger)
       // .concat(postsApi.middleware)
       .concat(authApi.middleware),
 })

@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux'
-// import exampleReducer from 'store/exampleSlice'
 
 //  services
 // import { postsApi } from '@/services/api'
@@ -23,7 +22,6 @@ const rootReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
 
   // reducers
-  // example: exampleReducer,
   auth: authReducer,
   counter: counterReducer,
   posts: postsReducer,
