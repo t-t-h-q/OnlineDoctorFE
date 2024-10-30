@@ -1,4 +1,4 @@
-import { postsApi } from '@/services/api'
+import { postsApi } from 'services/api'
 import { configureStore } from '@reduxjs/toolkit'
 import rootReducer from 'store/rootReducer'
 
