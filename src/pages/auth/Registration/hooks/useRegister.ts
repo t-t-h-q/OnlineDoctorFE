@@ -9,11 +9,20 @@ const useRegister = (form: FormInstance<any>) => {
   const [register, { isLoading: isRegisterLoading, isSuccess: isRegisterSuccess }] = useRegisterMutation()
   const { successNoti } = useToast()
 
-  const onRegister = async (params: IRegisterRequest) => {
+  const onRegister = async (params: IRegisterRequest, isDoctor: boolean) => {
     try {
-      await register(params).unwrap()
+      const response = await register(params).unwrap()
       form.resetFields()
       successNoti('Register success!')
+
+      // TODO: continue with register doctor or patient
+      if (isDoctor) {
+        // eslint-disable-next-line no-console
+        console.log('Register doctor', response)
+      } else {
+        // eslint-disable-next-line no-console
+        console.log('Register patient', response)
+      }
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log('Register error:', error)

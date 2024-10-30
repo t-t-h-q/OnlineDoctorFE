@@ -1,6 +1,6 @@
 import React from 'react'
 import type { FormProps } from 'antd'
-import { Button, Checkbox, Form, Input } from 'antd'
+import { Button, Form, Input } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
 import AuthLayout from '@/layouts/AuthLayout'
@@ -9,24 +9,20 @@ import { ILoginRequest } from '@/interfaces/auth'
 import { COMMON_PATHS } from '@/constants/routeNames'
 import useLogin from './hooks/useLogin'
 
-interface ILoginForm extends ILoginRequest {
-  remember: boolean
-}
-
 const Login: React.FC = () => {
   const navigate = useNavigate()
   const { isLoginLoading, onLogin } = useLogin()
 
-  const onFinish: FormProps<ILoginForm>['onFinish'] = (values) => {
+  const onFinish: FormProps<ILoginRequest>['onFinish'] = (values) => {
     const { email, password } = values
     onLogin({ email, password })
   }
 
   return (
     <AuthLayout>
-      <Form name='basic' onFinish={onFinish} autoComplete='off' layout='vertical'>
+      <Form name='login' onFinish={onFinish} autoComplete='off' layout='vertical'>
         <h1 className='text-3xl font-bold mb-5 text-center'>Login</h1>
-        <Form.Item<ILoginForm>
+        <Form.Item<ILoginRequest>
           label='Email'
           name='email'
           rules={[
@@ -43,7 +39,7 @@ const Login: React.FC = () => {
           <Input size='large' placeholder='Enter your email' className='w-full' />
         </Form.Item>
 
-        <Form.Item<ILoginForm>
+        <Form.Item<ILoginRequest>
           label='Password'
           name='password'
           rules={[
@@ -56,11 +52,7 @@ const Login: React.FC = () => {
           <Input.Password size='large' placeholder='Enter your password' />
         </Form.Item>
 
-        <div className='flex justify-between'>
-          <Form.Item<ILoginForm> name='remember' valuePropName='checked'>
-            <Checkbox className='whitespace-nowrap'>Remember me</Checkbox>
-          </Form.Item>
-
+        <div className='flex justify-end -mt-5 mb-5'>
           <div>
             <Button type='link' block onClick={() => navigate('/reset-password')}>
               Forgot Password
@@ -82,11 +74,8 @@ const Login: React.FC = () => {
         </Form.Item>
 
         <div className='flex flex-col mt-10 text-center'>
-          <Button type='link' onClick={() => navigate(COMMON_PATHS.REGISTER.PATIENT)} disabled={isLoginLoading}>
-            Create your account as Patient
-          </Button>
-          <Button type='link' onClick={() => navigate(COMMON_PATHS.REGISTER.DOCTOR)} disabled={isLoginLoading}>
-            Create your account as Doctor
+          <Button type='link' onClick={() => navigate(COMMON_PATHS.REGISTER)} disabled={isLoginLoading}>
+            Create your account
           </Button>
         </div>
       </Form>
