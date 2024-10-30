@@ -1,10 +1,20 @@
+import React from 'react'
 import { Outlet } from 'react-router-dom'
+import { Layout } from 'antd'
+import DashboardHeader from '@/components/DashboardHeader/DashboardHeader'
+import Sider from 'components/Sider/Sider'
 
-export const PatientLayout = () => {
+const PatientLayout: React.FC = () => {
   return (
-    <div className='layout'>
-      <Outlet />
-    </div>
+    <Layout className='min-h-screen'>
+      <Sider />
+      <Layout className='bg-gray-50'>
+        <DashboardHeader />
+        <div className='p-6'>
+          <Outlet />
+        </div>
+      </Layout>
+    </Layout>
   )
 }
 

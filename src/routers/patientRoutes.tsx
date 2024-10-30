@@ -1,10 +1,11 @@
 import { redirect } from 'react-router-dom'
 import { AUTH_PATIENT_COOKIE_NAME } from '../constants/auth'
+import { Navigate } from 'react-router-dom'
 
 const authenticatedPatientLoader = async () => {
   // TODO: add isPatientAuthenticated to the router
   const isPatientAuthenticated = document.cookie.includes(AUTH_PATIENT_COOKIE_NAME)
-  if (!isPatientAuthenticated) {
+  if (isPatientAuthenticated) {
     return redirect('/login')
   }
 
@@ -22,11 +23,23 @@ const patientRoutes = [
     children: [
       {
         index: true,
+        element: <Navigate to='/patients/appointment-booking' />,
+      },
+      {
+        path: 'appointment-booking',
         async lazy() {
           const AppointmentBooking = await import('../pages/patients/AppointmentBooking')
           return { Component: AppointmentBooking.default }
         },
       },
+      {
+        path: 'find-doctors',
+        async lazy() {
+          const FindDoctors = await import('../pages/patients/FindDoctors/FindDoctors')
+          return { Component: FindDoctors.default }
+        },
+      },
+
       {
         path: 'manage-appointments',
         children: [
