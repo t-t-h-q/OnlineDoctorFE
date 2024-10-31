@@ -15,7 +15,7 @@ const router = createBrowserRouter([
       {
         index: true,
         async lazy() {
-          const HomePage = await import('../pages/Home/Home')
+          const HomePage = await import('../pages/Home')
           return { Component: HomePage.default }
         },
       },
