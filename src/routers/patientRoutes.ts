@@ -1,9 +1,13 @@
 import { redirect } from 'react-router-dom'
-import { AUTH_PATIENT_COOKIE_NAME } from '../constants/auth'
+import { get } from 'lodash'
+import store from '@/store'
+import { ERoles } from '@/enums/role'
 
 const authenticatedPatientLoader = async () => {
-  // TODO: add isPatientAuthenticated to the router
-  const isPatientAuthenticated = document.cookie.includes(AUTH_PATIENT_COOKIE_NAME)
+  const storeApp = store.getState()
+  const roleId = get(storeApp, 'auth.currentUser.role.id', null)
+  const isPatientAuthenticated = ERoles.PATIENT === roleId
+
   if (!isPatientAuthenticated) {
     return redirect('/login')
   }

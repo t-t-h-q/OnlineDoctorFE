@@ -1,5 +1,11 @@
-import { postsApi } from '@/services/api'
 import { combineReducers } from 'redux'
+
+//  services
+// import { postsApi } from '@/services/api'
+import { authApi } from '@/services/auth'
+
+//  reducers
+import authReducer from '@/store/auth'
 import counterReducer from '@/store/counterSlice'
 import postsReducer from 'store/postsSlice'
 
@@ -12,9 +18,11 @@ import postsReducer from 'store/postsSlice'
 
 const rootReducer = combineReducers({
   // services
-  [postsApi.reducerPath]: postsApi.reducer,
+  // [postsApi.reducerPath]: postsApi.reducer,
+  [authApi.reducerPath]: authApi.reducer,
 
   // reducers
+  auth: authReducer,
   counter: counterReducer,
   posts: postsReducer,
 })
