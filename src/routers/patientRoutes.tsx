@@ -1,6 +1,7 @@
 import { redirect } from 'react-router-dom'
 import { AUTH_PATIENT_COOKIE_NAME } from '../constants/auth'
 import { Navigate } from 'react-router-dom'
+import { PATIENT_PATHS } from 'constants/routeNames'
 
 const authenticatedPatientLoader = async () => {
   // TODO: add isPatientAuthenticated to the router
@@ -14,7 +15,7 @@ const authenticatedPatientLoader = async () => {
 
 const patientRoutes = [
   {
-    path: '/patients',
+    path: PATIENT_PATHS.BASE,
     loader: authenticatedPatientLoader,
     async lazy() {
       const PatientLayout = await import('../layouts/PatientLayout')
@@ -23,25 +24,25 @@ const patientRoutes = [
     children: [
       {
         index: true,
-        element: <Navigate to='/patients/appointment-booking' />,
+        element: <Navigate to={PATIENT_PATHS.APPOINTMENT_BOOKING} />,
       },
       {
-        path: 'appointment-booking',
+        path: PATIENT_PATHS.APPOINTMENT_BOOKING,
         async lazy() {
           const AppointmentBooking = await import('../pages/patients/AppointmentBooking')
           return { Component: AppointmentBooking.default }
         },
       },
       {
-        path: 'find-doctors',
+        path: PATIENT_PATHS.FIND_DOCTORS,
         async lazy() {
-          const FindDoctors = await import('../pages/patients/FindDoctors/FindDoctors')
+          const FindDoctors = await import('../pages/patients/FindDoctors')
           return { Component: FindDoctors.default }
         },
       },
 
       {
-        path: 'manage-appointments',
+        path: PATIENT_PATHS.MANAGE_APPOINTMENTS,
         children: [
           {
             path: '',
@@ -60,14 +61,14 @@ const patientRoutes = [
         ],
       },
       {
-        path: 'online-payment',
+        path: PATIENT_PATHS.ONLINE_PAYMENT,
         async lazy() {
           const OnlinePayment = await import('../pages/patients/OnlinePayment')
           return { Component: OnlinePayment.default }
         },
       },
       {
-        path: 'settings',
+        path: PATIENT_PATHS.SETTINGS,
         async lazy() {
           const Settings = await import('../pages/patients/Settings')
           return { Component: Settings.default }

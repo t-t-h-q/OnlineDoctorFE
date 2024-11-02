@@ -1,15 +1,15 @@
 import { Button } from 'antd'
-import { useGetPostsQuery } from 'services/api'
+// import { useGetPostsQuery } from 'services/api'
 import { useCounter } from 'hooks/useCounter'
-import { usePost } from 'hooks/usePosts'
+// import { usePost } from 'hooks/usePosts'
 
 export const Home = () => {
-  const { error, isLoading } = useGetPostsQuery()
+  // const { error, isLoading } = useGetPostsQuery()
 
   const { count, handleIncrement, handleDecrement, handleIncrementByAmount } = useCounter()
-  const { postsList, handleReset } = usePost()
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>An error occurred</div>
+  // const { postsList, handleReset } = usePost()
+  // if (isLoading) return <div>Loading...</div>
+  // if (error) return <div>An error occurred</div>
 
   return (
     <>
@@ -25,11 +25,11 @@ export const Home = () => {
         <Button type='primary' className='mt-10 btn' onClick={() => handleIncrementByAmount(5)}>
           +5
         </Button>
-        <Button type='primary' className='mt-10 btn' onClick={handleReset}>
+        {/* <Button type='primary' className='mt-10 btn' onClick={handleReset}>
           reset posts state
-        </Button>
+        </Button> */}
       </div>
-      <ul>{postsList?.map((post) => <li key={post.id}>{post.title}</li>)}</ul>
+      {/* <ul>{postsList?.map((post) => <li key={post.id}>{post.title}</li>)}</ul> */}
     </>
   )
 }

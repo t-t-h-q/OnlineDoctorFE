@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Input, Select, Rate, Button, Card, Space, Tag } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { Input, Select, Rate, Button, Card, Space, Tag, Pagination } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faSearch,
@@ -9,6 +9,7 @@ import {
   faCalendarCheck,
   faUser,
 } from '@fortawesome/free-solid-svg-icons'
+import { SAMPLE_DOCTORS } from 'mockData/findoctorsData'
 
 // Types
 interface Doctor {
@@ -28,27 +29,6 @@ interface SearchFilters {
   showAvailableOnly: boolean
 }
 
-// Sample data
-const SAMPLE_DOCTORS: Doctor[] = [
-  {
-    id: 1,
-    name: 'Dr. John Smith',
-    specialty: 'Cardiology',
-    rating: 4.5,
-    availability: true,
-    location: 'New York',
-  },
-  {
-    id: 2,
-    name: 'Dr. Sarah Johnson',
-    specialty: 'Pediatrics',
-    rating: 5,
-    availability: false,
-    location: 'Los Angeles',
-  },
-  // Add more sample doctors as needed
-]
-
 const SPECIALTIES = ['Cardiology', 'Pediatrics', 'Neurology', 'Dermatology', 'Orthopedics']
 
 const FindDoctors: React.FC = () => {
@@ -61,8 +41,15 @@ const FindDoctors: React.FC = () => {
     showAvailableOnly: false,
   })
 
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1)
+  const pageSize = 3 // Number of items per page
+
   // Filter doctors based on search criteria
   const filteredDoctors = doctors.filter((doctor) => {
+    if (!filters.specialty && !filters.location && !filters.name && !filters.rating && !filters.showAvailableOnly) {
+      return true
+    }
     const matchesSpecialty = !filters.specialty || doctor.specialty === filters.specialty
     const matchesLocation = !filters.location || doctor.location.toLowerCase().includes(filters.location.toLowerCase())
     const matchesName = !filters.name || doctor.name.toLowerCase().includes(filters.name.toLowerCase())
@@ -71,6 +58,24 @@ const FindDoctors: React.FC = () => {
 
     return matchesSpecialty && matchesLocation && matchesName && matchesRating && matchesAvailability
   })
+
+  // Calculate pagination
+  const totalItems = filteredDoctors.length
+  const startIndex = (currentPage - 1) * pageSize
+  const endIndex = startIndex + pageSize
+  const currentDoctors = filteredDoctors.slice(startIndex, endIndex)
+
+  // Handle page change
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+    // Scroll to top of the doctor list smoothly
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  // Reset pagination when filters change
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [filters])
 
   return (
     <div className='max-w-7xl mx-auto p-6'>
@@ -136,7 +141,7 @@ const FindDoctors: React.FC = () => {
 
       {/* Doctor List */}
       <div className='space-y-4'>
-        {filteredDoctors.map((doctor) => (
+        {currentDoctors.map((doctor) => (
           <Card key={doctor.id} className='shadow-sm hover:shadow-md transition-shadow'>
             <div className='flex justify-between items-center'>
               <div>
@@ -175,6 +180,18 @@ const FindDoctors: React.FC = () => {
           </Card>
         ))}
       </div>
+      {/* Pagination */}
+      {totalItems > 0 && (
+        <div className='mt-8 flex justify-center'>
+          <Pagination
+            current={currentPage}
+            total={totalItems}
+            pageSize={pageSize}
+            onChange={handlePageChange}
+            showSizeChanger={false}
+          />
+        </div>
+      )}
     </div>
   )
 }
