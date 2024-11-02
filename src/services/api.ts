@@ -1,6 +1,12 @@
-import { Post } from 'models/post'
+// import { Post } from 'models/post'
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { baseQuery } from 'services/base'
+import { customBaseQuery } from 'services/base'
+
+interface Post {
+  id: number
+  title: string
+  body: string
+}
 import { CATCH_TIME_SECONDS } from 'constants/time'
 
 /**
@@ -10,7 +16,7 @@ import { CATCH_TIME_SECONDS } from 'constants/time'
 
 export const postsApi = createApi({
   reducerPath: 'postsApi',
-  baseQuery: baseQuery,
+  baseQuery: customBaseQuery,
   tagTypes: ['Post'],
   keepUnusedDataFor: CATCH_TIME_SECONDS,
   endpoints: (builder) => ({
