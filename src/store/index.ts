@@ -1,6 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit'
-
-// import { postsApi } from '@/services/api'
 import { authApi } from '@/services/auth'
 import rootReducer from './rootReducer'
 import { doctorApi } from '@/services/doctor'
@@ -14,11 +12,7 @@ import { doctorApi } from '@/services/doctor'
 
 const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware()
-      // .concat(postsApi.middleware)
-      .concat(authApi.middleware)
-      .concat(doctorApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware).concat(doctorApi.middleware),
 })
 
 export type RootState = ReturnType<typeof rootReducer>
