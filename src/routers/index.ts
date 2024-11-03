@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       {
         path: 'login',
         async lazy() {
-          const PageLogin = await import('../pages/Login')
+          const PageLogin = await import('../pages/auth/Login')
           return { Component: PageLogin.default }
         },
       },
@@ -37,17 +37,10 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: 'register-patient',
+        path: 'register',
         async lazy() {
-          const PatientRegistration = await import('../pages/patients/Registration')
-          return { Component: PatientRegistration.default }
-        },
-      },
-      {
-        path: 'register-doctor',
-        async lazy() {
-          const DoctorRegistration = await import('../pages/doctors/Registration')
-          return { Component: DoctorRegistration.default }
+          const Registration = await import('../pages/auth/Registration/index')
+          return { Component: Registration.default }
         },
       },
     ],

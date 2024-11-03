@@ -10,9 +10,9 @@ import { forEach, get } from 'lodash'
 
 import { STORAGE_KEYS } from '@/constants/storageKeys'
 import StorageService from '@/services/localStorage'
-import { resetCredentials } from 'store/auth'
+import { resetCredentials } from '@/store/auth'
 import { toast } from 'react-toastify'
-import { ERROR_MESSAGES } from 'constants/errorMessages'
+import { ERROR_MESSAGES } from '@/constants/errorMessages'
 
 export const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_URL,

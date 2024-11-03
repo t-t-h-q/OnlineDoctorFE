@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { get } from 'lodash'
 
-import { IUser } from 'interfaces/user'
+import { IUser } from '@/interfaces/user'
 import type { RootState } from '@/store'
 import { authApi } from '@/services/auth'
 

@@ -8,7 +8,7 @@ import { SearchFormValues } from '@/interfaces/patient'
 import Loading from 'components/commons/Loading'
 import { IDoctor } from 'interfaces/doctor'
 import { PAGINATION } from 'constants/pagination'
-import DoctorCard from '@/components/DoctorCard'
+import SearchDoctorCard from 'components/SearchDoctorCard'
 
 const FindDoctors: React.FC = () => {
   const [doctors, setDoctors] = useState<IDoctor[]>([])
@@ -66,7 +66,9 @@ const FindDoctors: React.FC = () => {
       <DoctorSearchForm onFinish={handleOnFinish} />
 
       {/* Doctor List */}
-      <div className='space-y-4'>{currentDoctors?.map((doctor) => <DoctorCard key={doctor.id} doctor={doctor} />)}</div>
+      <div className='space-y-4'>
+        {currentDoctors?.map((doctor) => <SearchDoctorCard key={doctor.id} doctor={doctor} />)}
+      </div>
 
       {/* Pagination */}
       {totalItems > 0 && (

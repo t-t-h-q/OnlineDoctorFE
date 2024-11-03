@@ -1,5 +1,5 @@
-import { ERoles } from 'enums/role'
-import { EStatus } from 'enums/status'
+import { ERoles } from '@/enums/role'
+import { EStatus } from '@/enums/status'
 
 export interface IRole {
   id: string

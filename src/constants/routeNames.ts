@@ -7,10 +7,7 @@ export const COMMON_PATHS = {
   FORGOT_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
   NOT_FOUND: '/not-found',
-  REGISTER: {
-    PATIENT: '/register-patient',
-    DOCTOR: '/register-doctor',
-  },
+  REGISTER: '/register',
 }
 
 export const ADMIN_ROUTES = {

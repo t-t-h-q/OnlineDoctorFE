@@ -1,5 +1,11 @@
-import { Post } from 'models/post'
+// import { Post } from 'models/post'
 import { createApi } from '@reduxjs/toolkit/query/react'
+
+interface Post {
+  id: number
+  title: string
+  body: string
+}
 import { CATCH_TIME_SECONDS } from 'constants/time'
 import { customBaseQuery } from 'services/base'
 
