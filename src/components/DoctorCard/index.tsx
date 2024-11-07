@@ -1,9 +1,9 @@
 import React from 'react'
 import { Card, Avatar, Rate, Typography } from 'antd'
-import { Doctor } from 'interfaces/home'
+import { IDoctor } from 'interfaces/doctor'
 
 interface DoctorCardProps {
-  doctor: Doctor
+  doctor: IDoctor
   index: number
 }
 

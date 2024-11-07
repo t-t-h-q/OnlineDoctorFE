@@ -2,7 +2,8 @@ import React from 'react'
 import { Layout, Badge, Dropdown, Avatar, Space } from 'antd'
 import type { MenuProps } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell, faEnvelope, faUser, faCog, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faBell, faCog, faEnvelope, faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons'
+import { MenuItem } from 'components/Header'
 
 const { Header } = Layout
 
@@ -11,41 +12,38 @@ interface HeaderProps {
   avatarUrl?: string
 }
 
+const PROFILE_MENU_ITEMS: MenuItem[] = [
+  {
+    key: 'profile',
+    icon: faUser,
+    label: 'Thông tin cá nhân',
+  },
+  {
+    key: 'settings',
+    icon: faCog,
+    label: 'Cài đặt',
+  },
+  {
+    key: 'logout',
+    icon: faSignOutAlt,
+    label: 'Đăng xuất',
+  },
+]
+
 const DashboardHeader: React.FC<HeaderProps> = ({
   username = 'Nguyễn Văn A',
   avatarUrl = 'https://via.placeholder.com/32',
 }) => {
   const profileMenu: MenuProps['items'] = [
-    {
-      key: 'profile',
+    ...PROFILE_MENU_ITEMS.map((item) => ({
+      key: item.key,
       label: (
         <Space>
-          <FontAwesomeIcon icon={faUser} />
-          Thông tin cá nhân
+          <FontAwesomeIcon icon={item.icon} />
+          {item.label}
         </Space>
       ),
-    },
-    {
-      key: 'settings',
-      label: (
-        <Space>
-          <FontAwesomeIcon icon={faCog} />
-          Cài đặt
-        </Space>
-      ),
-    },
-    {
-      type: 'divider',
-    },
-    {
-      key: 'logout',
-      label: (
-        <Space>
-          <FontAwesomeIcon icon={faSignOutAlt} />
-          Đăng xuất
-        </Space>
-      ),
-    },
+    })),
   ]
 
   return (

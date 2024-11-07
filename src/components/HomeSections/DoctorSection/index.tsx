@@ -1,11 +1,11 @@
 import React from 'react'
 import { Typography } from 'antd'
-import { Doctor } from 'interfaces/home'
 import DoctorCard from 'components/DoctorCard'
+import { IDoctor } from 'interfaces/doctor'
 
 const { Title } = Typography
 
-const doctors: Doctor[] = [
+const doctors: IDoctor[] = [
   {
     name: 'Dr. Nguyễn Văn A',
     specialty: 'Tim mạch',

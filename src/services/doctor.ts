@@ -3,7 +3,7 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 import { CATCH_TIME_SECONDS } from 'constants/time'
 import { generateFakeUsers } from 'fakeData/doctorsData'
 import { IDoctor } from 'interfaces/doctor'
-import { ISearchParams, ISearchResponse } from 'interfaces/patient'
+import { ISearchDoctorParams, ISearchDoctorResponse } from '@/interfaces/doctor'
 import { filter, toLower, includes } from 'lodash'
 
 // Generate fake data once and reuse
@@ -18,7 +18,7 @@ const CACHED_DOCTORS = generateFakeUsers(100)
  * @param searchParams - The search parameters to filter the list of doctors.
  * @returns An object containing the filtered list of doctors and the total number of items after filtering.
  */
-const processDoctors = (doctors: IDoctor[], searchParams: ISearchParams): ISearchResponse => {
+const processDoctors = (doctors: IDoctor[], searchParams: ISearchDoctorParams): ISearchDoctorResponse => {
   const { specialty, location, name, rating, showAvailableOnly } = searchParams
   if (!specialty && !location && !name && !rating && !showAvailableOnly) {
     return {
@@ -61,7 +61,7 @@ export const doctorApi = createApi({
   tagTypes: ['doctors'],
   keepUnusedDataFor: CATCH_TIME_SECONDS,
   endpoints: (builder) => ({
-    searchDoctors: builder.query<ISearchResponse, ISearchParams>({
+    searchDoctors: builder.query<ISearchDoctorResponse, ISearchDoctorParams>({
       query: (params) => ({
         url: 'patients/find-doctors/search',
         method: 'GET',

@@ -2,19 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { Pagination } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStethoscope } from '@fortawesome/free-solid-svg-icons'
-import { useLazySearchDoctorsQuery } from '@/services/doctor'
 import DoctorSearchForm from 'components/DoctorSearchForm'
-import { SearchFormValues } from '@/interfaces/patient'
 import Loading from 'components/commons/Loading'
-import { IDoctor } from 'interfaces/doctor'
+import { IDoctor, ISearchDoctorParams } from 'interfaces/doctor'
 import { PAGINATION } from 'constants/pagination'
 import SearchDoctorCard from 'components/SearchDoctorCard'
+import useSearchDoctor from '@/hooks/useSearchDoctor'
 
 const FindDoctors: React.FC = () => {
   const [doctors, setDoctors] = useState<IDoctor[]>([])
 
-  const [searchUsers, { data, isLoading: isLoadingData, isFetching }] = useLazySearchDoctorsQuery()
-
+  const { fetchDoctorSearchList, data, isLoadingData, isFetching } = useSearchDoctor()
   // Pagination state
   const [currentPage, setCurrentPage] = useState(PAGINATION.DEFAULT_CURRENT_PAGE)
   const pageSize = PAGINATION.DEFAULT_PAGE_SIZE // Number of items per page
@@ -39,15 +37,9 @@ const FindDoctors: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const handleOnFinish = async (params: SearchFormValues) => {
-    try {
-      setCurrentPage(PAGINATION.DEFAULT_CURRENT_PAGE)
-
-      await searchUsers(params).unwrap()
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log('Fetch doctor error:', error)
-    }
+  const handleOnFinish = async (params: ISearchDoctorParams) => {
+    await fetchDoctorSearchList(params)
+    setCurrentPage(PAGINATION.DEFAULT_CURRENT_PAGE)
   }
 
   if (isLoadingData || isFetching) {

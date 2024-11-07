@@ -1,13 +1,19 @@
 import React from 'react'
 import { Button, Menu, Layout } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser, faHospital, faNewspaper, faCalendarPlus, faHome } from '@fortawesome/free-solid-svg-icons'
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
+import {
+  faUser,
+  faHospital,
+  faCalendarPlus,
+  faHome,
+  faNewspaper,
+  IconDefinition,
+} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 
 const { Header: AntHeader } = Layout
 
-interface MenuItem {
+export interface MenuItem {
   key: string
   icon: IconDefinition
   label: string

@@ -2,12 +2,12 @@ import React from 'react'
 import { Form, Input, Select, Button, Rate, Space, Switch } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faStethoscope, faLocationDot, faStar, faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
-import { SearchFormValues } from 'interfaces/patient'
+import { ISearchDoctorParams } from '@/interfaces/doctor'
 
 const SPECIALTIES = ['Cardiology', 'Pediatrics', 'Neurology', 'Dermatology', 'Orthopedics']
 
 interface DoctorSearchFormProps {
-  onFinish: (values: SearchFormValues) => void
+  onFinish: (values: ISearchDoctorParams) => void
 }
 
 const DoctorSearchForm: React.FC<DoctorSearchFormProps> = ({ onFinish }) => {

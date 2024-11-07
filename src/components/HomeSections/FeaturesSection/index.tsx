@@ -1,8 +1,13 @@
 import React from 'react'
 import { Typography } from 'antd'
 import FeatureCard from 'components/FeatureCard'
-import { Feature } from 'interfaces/home'
-import { faClock, faShieldAlt, faDollarSign } from '@fortawesome/free-solid-svg-icons'
+import { faClock, faShieldAlt, faDollarSign, IconDefinition } from '@fortawesome/free-solid-svg-icons'
+
+export interface Feature {
+  icon: IconDefinition
+  title: string
+  description: string
+}
 
 const { Title } = Typography
 

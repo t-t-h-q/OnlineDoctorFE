@@ -1,9 +1,12 @@
 import React from 'react'
 import { List, Typography } from 'antd'
 import TestimonialCard from 'components/TestimonialCard'
-import { Testimonial } from 'interfaces/home'
 
-const { Title } = Typography
+export interface Testimonial {
+  name: string
+  comment: string
+  rating: number
+}
 
 const testimonials: Testimonial[] = [
   {
@@ -18,6 +21,8 @@ const testimonials: Testimonial[] = [
     rating: 4,
   },
 ]
+
+const { Title } = Typography
 
 const TestimonialsSection: React.FC = () => {
   return (
