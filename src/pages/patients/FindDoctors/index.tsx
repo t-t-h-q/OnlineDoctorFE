@@ -8,20 +8,23 @@ import { IDoctor, ISearchDoctorParams } from 'interfaces/doctor'
 import { PAGINATION } from 'constants/pagination'
 import SearchDoctorCard from 'components/SearchDoctorCard'
 import useSearchDoctor from '@/hooks/useSearchDoctor'
+import usePagination from '@/hooks/usePagination'
 
 const FindDoctors: React.FC = () => {
   const [doctors, setDoctors] = useState<IDoctor[]>([])
 
   const { fetchDoctorSearchList, data, isLoadingData, isFetching } = useSearchDoctor()
-  // Pagination state
-  const [currentPage, setCurrentPage] = useState(PAGINATION.DEFAULT_CURRENT_PAGE)
-  const pageSize = PAGINATION.DEFAULT_PAGE_SIZE // Number of items per page
 
-  // Calculate pagination
-  const totalItems = doctors.length
-  const startIndex = (currentPage - 1) * pageSize
-  const endIndex = startIndex + pageSize
-  const currentDoctors = doctors.slice(startIndex, endIndex)
+  const {
+    currentPage,
+    setCurrentPage,
+    currentData: currentDoctors,
+    totalItems,
+    handlePageChange,
+  } = usePagination({
+    data: doctors,
+    pageSize: PAGINATION.DEFAULT_PAGE_SIZE,
+  })
 
   // Update doctors when data changes
   useEffect(() => {
@@ -29,13 +32,6 @@ const FindDoctors: React.FC = () => {
       setDoctors(data.data)
     }
   }, [data])
-
-  // Handle page change
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page)
-    // Scroll to top of the doctor list smoothly
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
 
   const handleOnFinish = async (params: ISearchDoctorParams) => {
     await fetchDoctorSearchList(params)
@@ -68,7 +64,7 @@ const FindDoctors: React.FC = () => {
           <Pagination
             current={currentPage}
             total={totalItems}
-            pageSize={pageSize}
+            pageSize={PAGINATION.DEFAULT_PAGE_SIZE}
             onChange={handlePageChange}
             showSizeChanger={false}
           />

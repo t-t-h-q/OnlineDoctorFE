@@ -30,10 +30,7 @@ const PROFILE_MENU_ITEMS: MenuItem[] = [
   },
 ]
 
-const DashboardHeader: React.FC<HeaderProps> = ({
-  username = 'Nguyễn Văn A',
-  avatarUrl = 'https://via.placeholder.com/32',
-}) => {
+const DashboardHeader: React.FC<HeaderProps> = ({ username, avatarUrl }) => {
   const profileMenu: MenuProps['items'] = [
     ...PROFILE_MENU_ITEMS.map((item) => ({
       key: item.key,
@@ -61,12 +58,12 @@ const DashboardHeader: React.FC<HeaderProps> = ({
         </Badge>
 
         {/* Divider */}
-        <div className='h-6 w-px bg-gray-200'></div>
+        {(avatarUrl || username) && <div className='h-6 w-px bg-gray-200' />}
 
         {/* User Profile */}
         <Dropdown menu={{ items: profileMenu }} trigger={['click']} placement='bottomRight'>
           <div className='flex items-center gap-3 cursor-pointer'>
-            <Avatar src={avatarUrl} />
+            {avatarUrl && <Avatar src={avatarUrl} />}
             <span className='text-gray-700 font-medium'>{username}</span>
           </div>
         </Dropdown>

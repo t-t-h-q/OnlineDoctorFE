@@ -20,10 +20,10 @@ export interface MenuItem {
 }
 
 const menuItems: MenuItem[] = [
-  { key: 'home', icon: faHome, label: 'Trang chủ' },
-  { key: 'services', icon: faCalendarPlus, label: 'Dịch vụ' },
-  { key: 'doctors', icon: faUser, label: 'Bác sĩ' },
-  { key: 'news', icon: faNewspaper, label: 'Tin tức' },
+  { key: 'home', icon: faHome, label: 'Home' },
+  { key: 'services', icon: faCalendarPlus, label: 'Services' },
+  { key: 'doctors', icon: faUser, label: 'Doctors' },
+  { key: 'news', icon: faNewspaper, label: 'News' },
 ]
 
 const Header: React.FC = () => {
@@ -64,14 +64,14 @@ const Header: React.FC = () => {
             className='flex items-center whitespace-nowrap'
             onClick={() => navigate('/login')}
           >
-            <span className='ml-2'>Đăng nhập</span>
+            <span className='ml-2'>Login</span>
           </Button>
           <Button
             type='primary'
             className='bg-blue-600 hover:bg-blue-700 whitespace-nowrap'
             onClick={() => navigate('/register')}
           >
-            Đăng ký
+            Register
           </Button>
         </div>
       </div>

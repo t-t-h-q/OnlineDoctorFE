@@ -3,8 +3,7 @@ import { Form, Input, Select, Button, Rate, Space, Switch } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faStethoscope, faLocationDot, faStar, faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
 import { ISearchDoctorParams } from '@/interfaces/doctor'
-
-const SPECIALTIES = ['Cardiology', 'Pediatrics', 'Neurology', 'Dermatology', 'Orthopedics']
+import { SPECIALTIES } from '@/constants/doctor'
 
 interface DoctorSearchFormProps {
   onFinish: (values: ISearchDoctorParams) => void

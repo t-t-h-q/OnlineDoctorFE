@@ -14,18 +14,18 @@ const { Title } = Typography
 const features: Feature[] = [
   {
     icon: faClock,
-    title: 'Tiết kiệm thời gian',
-    description: 'Khám bệnh mọi lúc mọi nơi, không cần di chuyển',
+    title: 'Time-Saving',
+    description: 'Consult anytime, anywhere without the need to travel',
   },
   {
     icon: faShieldAlt,
-    title: 'An toàn & Bảo mật',
-    description: 'Thông tin cá nhân được bảo vệ tuyệt đối',
+    title: 'Safe & Secure',
+    description: 'Your personal information is completely protected',
   },
   {
     icon: faDollarSign,
-    title: 'Chi phí hợp lý',
-    description: 'Giá cả minh bạch và cạnh tranh',
+    title: 'Affordable',
+    description: 'Transparent and competitive pricing',
   },
 ]
 
@@ -34,7 +34,7 @@ const FeaturesSection: React.FC = () => {
     <section className='py-16 bg-white'>
       <div className='container mx-auto px-4'>
         <Title level={2} className='text-center mb-12'>
-          Tại sao chọn chúng tôi?
+          Why Choose Us?
         </Title>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
           {features.map((feature) => (

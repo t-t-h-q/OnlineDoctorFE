@@ -29,7 +29,7 @@ const TestimonialsSection: React.FC = () => {
     <section className='py-16 bg-white'>
       <div className='container mx-auto px-4'>
         <Title level={2} className='text-center mb-12'>
-          Đánh giá từ khách hàng
+          Customer Reviews
         </Title>
         <List
           grid={{
