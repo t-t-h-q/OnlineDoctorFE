@@ -19,8 +19,8 @@ const CACHED_DOCTORS = generateFakeUsers(100)
  * @returns An object containing the filtered list of doctors and the total number of items after filtering.
  */
 const processDoctors = (doctors: IDoctor[], searchParams: ISearchDoctorParams): ISearchDoctorResponse => {
-  const { specialty, location, name, rating, showAvailableOnly } = searchParams
-  if (!specialty && !location && !name && !rating && !showAvailableOnly) {
+  const { specialty, location, name } = searchParams
+  if (!specialty && !location && !name) {
     return {
       data: doctors,
       totalItems: doctors.length,
@@ -32,8 +32,6 @@ const processDoctors = (doctors: IDoctor[], searchParams: ISearchDoctorParams): 
       specialty: !specialty || doctor.specialty === specialty,
       location: !location || includes(toLower(doctor.location), toLower(location)),
       name: !name || includes(toLower(doctor.name), toLower(name)),
-      rating: !rating || doctor.rating >= rating,
-      availability: !showAvailableOnly || doctor.availability,
     }
 
     return Object.values(conditions).every(Boolean)

@@ -13,8 +13,6 @@ export interface ISearchDoctorParams {
   specialty?: string
   location?: string
   name?: string
-  rating?: number
-  showAvailableOnly?: boolean
 }
 
 export interface ISearchDoctorResponse {

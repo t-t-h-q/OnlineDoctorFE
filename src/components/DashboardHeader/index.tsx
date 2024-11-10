@@ -16,17 +16,17 @@ const PROFILE_MENU_ITEMS: MenuItem[] = [
   {
     key: 'profile',
     icon: faUser,
-    label: 'Thông tin cá nhân',
+    label: 'Personal Information',
   },
   {
     key: 'settings',
     icon: faCog,
-    label: 'Cài đặt',
+    label: 'Settings',
   },
   {
     key: 'logout',
     icon: faSignOutAlt,
-    label: 'Đăng xuất',
+    label: 'Log Out',
   },
 ]
 

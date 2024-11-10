@@ -1,30 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { Pagination } from 'antd'
+import { Button, Rate, Table, Tag } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStethoscope } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarCheck, faStethoscope, faUser } from '@fortawesome/free-solid-svg-icons'
 import DoctorSearchForm from 'components/DoctorSearchForm'
 import Loading from 'components/commons/Loading'
 import { IDoctor, ISearchDoctorParams } from 'interfaces/doctor'
-import { PAGINATION } from 'constants/pagination'
-import SearchDoctorCard from 'components/SearchDoctorCard'
 import useSearchDoctor from '@/hooks/useSearchDoctor'
-import usePagination from '@/hooks/usePagination'
+import type { ColumnsType, TableProps } from 'antd/es/table'
+import { useNavigate } from 'react-router-dom'
+import { DEFAULT_PAGE_SIZE } from '@/constants/pagination'
 
 const FindDoctors: React.FC = () => {
+  const navigate = useNavigate()
   const [doctors, setDoctors] = useState<IDoctor[]>([])
 
   const { fetchDoctorSearchList, data, isLoadingData, isFetching } = useSearchDoctor()
-
-  const {
-    currentPage,
-    setCurrentPage,
-    currentData: currentDoctors,
-    totalItems,
-    handlePageChange,
-  } = usePagination({
-    data: doctors,
-    pageSize: PAGINATION.DEFAULT_PAGE_SIZE,
-  })
 
   // Update doctors when data changes
   useEffect(() => {
@@ -33,9 +23,95 @@ const FindDoctors: React.FC = () => {
     }
   }, [data])
 
-  const handleOnFinish = async (params: ISearchDoctorParams) => {
+  // Column definitions
+  const columns: ColumnsType<IDoctor> = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Specialty',
+      dataIndex: 'specialty',
+      key: 'specialty',
+      filters: Array.from(new Set(doctors.map((d) => d.specialty))).map((specialty) => ({
+        text: specialty,
+        value: specialty,
+      })),
+      onFilter: (value, record) => record.specialty === value,
+      filterMultiple: true,
+    },
+    {
+      title: 'Rating',
+      dataIndex: 'rating',
+      key: 'rating',
+      render: (rating: number) => <Rate disabled defaultValue={rating} />,
+      filters: [
+        { text: '5', value: 5 },
+        { text: '4', value: 4 },
+        { text: '3', value: 3 },
+        { text: '2', value: 2 },
+        { text: '1', value: 1 },
+      ],
+      onFilter: (value, record) => record.rating == Number(value),
+      filterMultiple: false,
+    },
+    {
+      title: 'Availability',
+      dataIndex: 'availability',
+      key: 'availability',
+      render: (availability: boolean) => (
+        <Tag
+          color={availability ? 'green' : 'red'}
+          className='mb-4 inline-flex items-center gap-1'
+          icon={<FontAwesomeIcon icon={faCalendarCheck} />}
+        >
+          {availability ? 'Available' : 'Not Available'}
+        </Tag>
+      ),
+      filters: [
+        { text: 'Available', value: true },
+        { text: 'Not Available', value: false },
+      ],
+      onFilter: (value, record) => record.availability === value,
+      filterMultiple: false,
+    },
+    {
+      title: 'Location',
+      dataIndex: 'location',
+      key: 'location',
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <Button
+          type='primary'
+          icon={<FontAwesomeIcon icon={faUser} />}
+          onClick={() => handleOnclickViewProfile(record)}
+        >
+          View Profile
+        </Button>
+      ),
+    },
+  ]
+
+  // Search doctor with params
+  const handleDoctorSearch = async (params: ISearchDoctorParams) => {
     await fetchDoctorSearchList(params)
-    setCurrentPage(PAGINATION.DEFAULT_CURRENT_PAGE)
+  }
+
+  // Click to view profile
+  const handleOnclickViewProfile = (record: IDoctor) => {
+    const path = `/doctors/detail/${record.id}`
+    navigate(path)
+  }
+
+  // TODO: handle pagination, filters, sorter, extra in table
+  // Table change handler
+  const handleTableChange: TableProps<IDoctor>['onChange'] = (pagination, filters, sorter, extra) => {
+    // eslint-disable-next-line no-console
+    console.log('Table params:', { pagination, filters, sorter, extra })
   }
 
   if (isLoadingData || isFetching) {
@@ -51,25 +127,22 @@ const FindDoctors: React.FC = () => {
       </div>
 
       {/* Doctor Search */}
-      <DoctorSearchForm onFinish={handleOnFinish} />
+      <DoctorSearchForm onFinish={handleDoctorSearch} />
 
-      {/* Doctor List */}
-      <div className='space-y-4'>
-        {currentDoctors?.map((doctor) => <SearchDoctorCard key={doctor.id} doctor={doctor} />)}
-      </div>
-
-      {/* Pagination */}
-      {totalItems > 0 && (
-        <div className='mt-8 flex justify-center'>
-          <Pagination
-            current={currentPage}
-            total={totalItems}
-            pageSize={PAGINATION.DEFAULT_PAGE_SIZE}
-            onChange={handlePageChange}
-            showSizeChanger={false}
-          />
-        </div>
-      )}
+      {/* Table */}
+      <Table
+        columns={columns}
+        dataSource={doctors}
+        rowKey='id'
+        onChange={handleTableChange}
+        pagination={{
+          position: ['bottomCenter'],
+          total: doctors.length,
+          pageSize: DEFAULT_PAGE_SIZE,
+          showSizeChanger: true,
+          showTotal: (total) => `Total ${total} doctors`,
+        }}
+      />
     </div>
   )
 }

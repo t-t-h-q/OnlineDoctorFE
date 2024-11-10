@@ -1,7 +1,7 @@
 import React from 'react'
-import { Form, Input, Select, Button, Rate, Space, Switch } from 'antd'
+import { Form, Input, Select, Button } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faStethoscope, faLocationDot, faStar, faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faStethoscope, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import { ISearchDoctorParams } from '@/interfaces/doctor'
 import { SPECIALTIES } from '@/constants/doctor'
 
@@ -57,38 +57,6 @@ const DoctorSearchForm: React.FC<DoctorSearchFormProps> = ({ onFinish }) => {
             <Input
               placeholder='Search by Doctor Name'
               prefix={<FontAwesomeIcon icon={faSearch} className='text-gray-400' />}
-            />
-          </Form.Item>
-        </div>
-
-        <div className='flex flex-wrap gap-6 items-center mb-6'>
-          <Form.Item
-            name='rating'
-            label={
-              <span className='text-gray-700 flex items-center gap-2'>
-                <FontAwesomeIcon icon={faStar} className='text-yellow-400' />
-                Minimum Rating
-              </span>
-            }
-            className='mb-0'
-          >
-            <Rate allowHalf />
-          </Form.Item>
-
-          <Form.Item name='showAvailableOnly' valuePropName='checked' className='mb-0'>
-            <Switch
-              checkedChildren={
-                <Space>
-                  <FontAwesomeIcon icon={faCalendarCheck} />
-                  Available Only
-                </Space>
-              }
-              unCheckedChildren={
-                <Space>
-                  <FontAwesomeIcon icon={faCalendarCheck} />
-                  All
-                </Space>
-              }
             />
           </Form.Item>
         </div>

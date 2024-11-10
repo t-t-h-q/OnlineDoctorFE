@@ -36,59 +36,59 @@ const Sider: React.FC = () => {
     {
       key: 'appointments',
       icon: <FontAwesomeIcon icon={faCalendarAlt} />,
-      label: 'Lịch hẹn',
+      label: 'Appointments',
       children: [
         {
           key: 'appointment-booking',
           icon: <FontAwesomeIcon icon={faCalendarPlus} />,
-          label: 'Đặt lịch hẹn',
+          label: 'Book Appointment',
         },
         {
           key: 'manage-appointments',
           icon: <FontAwesomeIcon icon={faListAlt} />,
-          label: 'Quản lý lịch hẹn',
+          label: 'Manage Appointments',
         },
         {
           key: 'appointment-history',
           icon: <FontAwesomeIcon icon={faHistory} />,
-          label: 'Lịch sử lịch hẹn',
+          label: 'Appointment History',
         },
       ],
     },
     {
       key: 'find-doctors',
       icon: <FontAwesomeIcon icon={faSearch} />,
-      label: 'Tìm bác sĩ',
+      label: 'Find Doctors',
     },
     {
       key: 'communication',
       icon: <FontAwesomeIcon icon={faVideo} />,
-      label: 'Trao đổi với bác sĩ',
+      label: 'Communicate with Doctor',
     },
     {
       key: 'online-payment',
       icon: <FontAwesomeIcon icon={faCreditCard} />,
-      label: 'Thanh toán trực tuyến',
+      label: 'Online Payment',
     },
     {
       key: 'medical-records',
       icon: <FontAwesomeIcon icon={faFileAlt} />,
-      label: 'Hồ sơ bệnh án',
+      label: 'Medical Records',
     },
     {
       key: 'profile',
       icon: <FontAwesomeIcon icon={faUser} />,
-      label: 'Cá nhân',
+      label: 'Profile',
       children: [
         {
           key: 'settings',
           icon: <FontAwesomeIcon icon={faCog} />,
-          label: 'Cài đặt tài khoản',
+          label: 'Account Settings',
         },
         {
           key: 'logout',
           icon: <FontAwesomeIcon icon={faSignOutAlt} />,
-          label: 'Đăng xuất',
+          label: 'Logout',
         },
       ],
     },

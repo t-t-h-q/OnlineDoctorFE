@@ -22,7 +22,7 @@ export const generateFakeUsers = (count: number): IDoctor[] => {
       lastNames[Math.floor(Math.random() * lastNames.length)]
     }`,
     specialty: specialties[Math.floor(Math.random() * specialties.length)],
-    rating: Number((Math.random() * 4 + 1).toFixed(1)), // Rating từ 1.0 đến 5.0
+    rating: Math.floor(Math.random() * 5) + 1,
     availability: Math.random() > 0.3, // 70% chance available
     location: locations[Math.floor(Math.random() * locations.length)],
   }))
