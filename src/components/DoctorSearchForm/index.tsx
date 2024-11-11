@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Form, Input, Select, Button } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faStethoscope, faLocationDot } from '@fortawesome/free-solid-svg-icons'
@@ -11,6 +11,16 @@ interface DoctorSearchFormProps {
 
 const DoctorSearchForm: React.FC<DoctorSearchFormProps> = ({ onFinish }) => {
   const [form] = Form.useForm()
+
+  // Track the form values
+  const specialty = Form.useWatch('specialty', form)
+  const location = Form.useWatch('location', form)
+  const name = Form.useWatch('name', form)
+
+  // Check form value
+  const isFormEmpty = useMemo(() => {
+    return !specialty && !location && (!name || name.trim() === '')
+  }, [specialty, location, name])
 
   const handleReset = () => {
     form.resetFields()
@@ -65,7 +75,7 @@ const DoctorSearchForm: React.FC<DoctorSearchFormProps> = ({ onFinish }) => {
           <Button type='default' className='mr-2' onClick={handleReset}>
             Reset
           </Button>
-          <Button type='primary' htmlType='submit' icon={<FontAwesomeIcon icon={faSearch} />}>
+          <Button type='primary' htmlType='submit' icon={<FontAwesomeIcon icon={faSearch} />} disabled={isFormEmpty}>
             Search
           </Button>
         </Form.Item>

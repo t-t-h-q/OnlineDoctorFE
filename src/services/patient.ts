@@ -52,11 +52,11 @@ export const fakeBaseQuery = () => async () => {
 }
 
 // TODO: change when real api is available
-export const doctorApi = createApi({
+export const patientApi = createApi({
   // baseQuery: customBaseQuery,
   baseQuery: fakeBaseQuery(),
-  reducerPath: 'doctorApi',
-  tagTypes: ['doctors'],
+  reducerPath: 'patientApi',
+  tagTypes: ['patients'],
   keepUnusedDataFor: CATCH_TIME_SECONDS,
   endpoints: (builder) => ({
     searchDoctors: builder.query<ISearchDoctorResponse, ISearchDoctorParams>({
@@ -65,7 +65,7 @@ export const doctorApi = createApi({
         method: 'GET',
         params: params,
       }),
-      providesTags: ['doctors'],
+      providesTags: ['patients'],
       transformResponse: (_response, _meta, arg) => {
         return processDoctors(CACHED_DOCTORS, arg || {})
       },
@@ -73,4 +73,4 @@ export const doctorApi = createApi({
   }),
 })
 
-export const { useLazySearchDoctorsQuery } = doctorApi
+export const { useLazySearchDoctorsQuery } = patientApi
