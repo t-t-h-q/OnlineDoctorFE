@@ -7,9 +7,10 @@ import { SPECIALTIES } from '@/constants/doctor'
 
 interface DoctorSearchFormProps {
   onFinish: (values: ISearchDoctorParams) => void
+  setSearchParams: React.Dispatch<React.SetStateAction<ISearchDoctorParams>>
 }
 
-const DoctorSearchForm: React.FC<DoctorSearchFormProps> = ({ onFinish }) => {
+const DoctorSearchForm: React.FC<DoctorSearchFormProps> = ({ onFinish, setSearchParams }) => {
   const [form] = Form.useForm()
 
   // Track the form values
@@ -27,11 +28,16 @@ const DoctorSearchForm: React.FC<DoctorSearchFormProps> = ({ onFinish }) => {
     form.setFieldsValue({ rating: 0, showAvailableOnly: false })
   }
 
+  const handleSubmit = (values: ISearchDoctorParams) => {
+    onFinish(values)
+    setSearchParams(values)
+  }
+
   return (
     <div className='bg-white p-6 rounded-lg shadow-md mb-8'>
       <Form
         form={form}
-        onFinish={onFinish}
+        onFinish={handleSubmit}
         layout='vertical'
         initialValues={{
           rating: 0,

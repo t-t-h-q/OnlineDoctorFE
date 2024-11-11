@@ -16,6 +16,13 @@ const FindDoctors: React.FC = () => {
 
   const { fetchDoctorSearchList, data, isLoadingData, isFetching } = useSearchDoctor()
 
+  const [searchParams, setSearchParams] = useState<ISearchDoctorParams>({
+    page: 1,
+    specialty: undefined,
+    location: undefined,
+    name: undefined,
+  })
+
   // Update doctors when data changes
   useEffect(() => {
     if (data?.data) {
@@ -111,7 +118,7 @@ const FindDoctors: React.FC = () => {
   // Table change handler
   const handleTableChange: TableProps<IDoctor>['onChange'] = (pagination, filters, sorter, extra) => {
     // eslint-disable-next-line no-console
-    console.log('Table params:', { pagination, filters, sorter, extra })
+    console.log('Table params:', { pagination, filters, sorter, extra }, searchParams)
   }
 
   if (isLoadingData || isFetching) {
@@ -127,7 +134,7 @@ const FindDoctors: React.FC = () => {
       </div>
 
       {/* Doctor Search */}
-      <DoctorSearchForm onFinish={handleDoctorSearch} />
+      <DoctorSearchForm onFinish={handleDoctorSearch} setSearchParams={setSearchParams} />
 
       {/* Table */}
       <Table
@@ -137,6 +144,7 @@ const FindDoctors: React.FC = () => {
         onChange={handleTableChange}
         pagination={{
           position: ['bottomCenter'],
+          current: 1,
           total: doctors.length,
           pageSize: DEFAULT_PAGE_SIZE,
           showSizeChanger: true,

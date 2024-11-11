@@ -10,6 +10,7 @@ export interface IDoctor {
 }
 
 export interface ISearchDoctorParams {
+  page?: number
   specialty?: string
   location?: string
   name?: string
