@@ -8,6 +8,7 @@ import { authApi } from '@/services/auth'
 import authReducer from '@/store/auth'
 import counterReducer from '@/store/counterSlice'
 import postsReducer from 'store/postsSlice'
+import { patientApi } from '@/services/patients'
 
 /**
  * Combines multiple reducers into a single reducer function.
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   // services
   // [postsApi.reducerPath]: postsApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
+  [patientApi.reducerPath]: patientApi.reducer,
 
   // reducers
   auth: authReducer,
