@@ -1,24 +1,44 @@
 import React from 'react'
-import { Card, Avatar, Rate, Typography } from 'antd'
-import { Doctor } from 'interfaces/home'
+import { Card, Typography } from 'antd'
+import { IDoctor } from '../../interfaces/doctor'
+import { DoctorSpecialty } from '../DoctorSpecialty'
+import { DoctorRating } from '../DoctorRating'
+import classNames from 'classnames'
 
 interface DoctorCardProps {
-  doctor: Doctor
-  index: number
+  doctor: IDoctor
+  children?: React.ReactNode
+  isSelected?: boolean
 }
 
 const { Title, Text } = Typography
 
-const DoctorCard: React.FC<DoctorCardProps> = ({ doctor, index }) => {
+const DoctorCard: React.FC<DoctorCardProps> = ({ doctor, children, isSelected }) => {
+  const doctorCardClassname = classNames('text-center p-0 hover:shadow-lg transition-shadow duration-300', {
+    'hover:shadow-lg': true,
+    'transition-shadow': true,
+    'duration-300': true,
+    'border-2 border-blue-500': isSelected, // Add border if selected
+  })
+
   return (
-    <Card key={index} className='text-center hover:shadow-lg transition-shadow duration-300' hoverable>
-      <Avatar size={100} src={doctor.image} alt={doctor.name} className='mb-4' />
-      <Title level={4} className='mt-4 mb-2'>
-        {doctor.name}
-      </Title>
-      <Text className='block text-gray-500 mb-1'>{doctor.specialty}</Text>
-      <Text className='block text-gray-500 mb-2'>{doctor.experience}</Text>
-      <Rate disabled defaultValue={doctor.rating} />
+    <Card
+      className={doctorCardClassname}
+      hoverable
+      bordered
+      cover={<img alt='example' src={doctor.avatar} style={{ height: '250px', objectFit: 'cover' }} />}
+    >
+      <div className='flex flex-col item-center'>
+        <Title level={4} className='mt-4 mb-2'>
+          {doctor.name}
+          <Text className='block text-gray-500'>{doctor.general_information.experience}</Text>
+        </Title>
+        <DoctorSpecialty specialties={doctor.specialties} />
+        <div className='pt-4'>
+          <DoctorRating average_rating={doctor.ratings.average_rating} review_count={doctor.ratings.review_count} />
+        </div>
+        {children}
+      </div>
     </Card>
   )
 }

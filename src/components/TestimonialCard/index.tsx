@@ -1,11 +1,16 @@
 import { Card, Rate, Typography, List } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuoteLeft } from '@fortawesome/free-solid-svg-icons'
-import { Testimonial } from 'interfaces/home'
 
 const { Text, Paragraph } = Typography
 
-const TestimonialCard: React.FC<{ item: Testimonial }> = ({ item }) => {
+export interface TestimonialCardProps {
+  rating: number
+  comment: string
+  name: string
+}
+
+const TestimonialCard = ({ rating, comment, name }: TestimonialCardProps) => {
   return (
     <List.Item className='!w-full'>
       <div className='h-full'>
@@ -17,7 +22,7 @@ const TestimonialCard: React.FC<{ item: Testimonial }> = ({ item }) => {
             </div>
 
             {/* Rating */}
-            <Rate disabled defaultValue={item.rating} className='mb-4' />
+            <Rate disabled defaultValue={rating} className='mb-4' />
 
             {/* Comment */}
             <div className='flex-1 mb-4'>
@@ -30,14 +35,14 @@ const TestimonialCard: React.FC<{ item: Testimonial }> = ({ item }) => {
                 }}
                 className='text-gray-600 text-base'
               >
-                {item.comment}
+                {comment}
               </Paragraph>
             </div>
 
             {/* Author */}
             <div className='mt-auto pt-4 border-t border-gray-100'>
               <Text strong className='text-blue-600 text-lg'>
-                {item.name}
+                {name}
               </Text>
             </div>
           </div>

@@ -17,14 +17,14 @@ const useRegister = (form: FormInstance<any>) => {
 
       // TODO: continue with register doctor or patient
       if (isDoctor) {
-        // eslint-disable-next-line no-console
+         
         console.log('Register doctor', response)
       } else {
-        // eslint-disable-next-line no-console
+         
         console.log('Register patient', response)
       }
     } catch (error) {
-      // eslint-disable-next-line no-console
+       
       console.log('Register error:', error)
     }
   }

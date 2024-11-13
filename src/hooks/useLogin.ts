@@ -24,7 +24,7 @@ const useLogin = () => {
       const pathToRedirect = getRolePath(role.name)
       navigate(pathToRedirect)
     } catch (error) {
-      // eslint-disable-next-line no-console
+       
       console.log('Login error:', error)
     }
   }

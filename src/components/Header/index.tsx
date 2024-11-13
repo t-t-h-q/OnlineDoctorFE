@@ -24,7 +24,7 @@ const Header: React.FC = () => {
   const navigate = useNavigate()
 
   return (
-    <AntHeader className='bg-white shadow-md fixed w-full z-10'>
+    <AntHeader className='bg-white shadow-md w-full fixed z-10'>
       <div className='container mx-auto flex justify-between items-center h-full'>
         {/* Logo section */}
         <div className='flex items-center flex-1'>
@@ -58,14 +58,14 @@ const Header: React.FC = () => {
             className='flex items-center whitespace-nowrap'
             onClick={() => navigate('/login')}
           >
-            <span className='ml-2'>Đăng nhập</span>
+            <span className='ml-2'>Login</span>
           </Button>
           <Button
             type='primary'
             className='bg-blue-600 hover:bg-blue-700 whitespace-nowrap'
             onClick={() => navigate('/register')}
           >
-            Đăng ký
+            Sign up
           </Button>
         </div>
       </div>

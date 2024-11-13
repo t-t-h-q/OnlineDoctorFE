@@ -9,7 +9,22 @@ export const doctorApi = createApi({
     getDoctorDetail: builder.query<IDoctor, string>({
       query: (id: string) => `doctor/${id}`,
     }),
+    getDoctors: builder.query<
+      IDoctor[],
+      {
+        searchQuery: {
+          name?: string
+          specialty?: string
+        }
+        sortOption: 'rating' | 'name'
+      }
+    >({
+      query: ({ searchQuery, sortOption }) => ({
+        url: `/doctors`,
+        params: { ...(searchQuery || {}), sortOption },
+      }),
+    }),
   }),
 })
 
-export const { useGetDoctorDetailQuery, useLazyGetDoctorDetailQuery } = doctorApi
+export const { useGetDoctorDetailQuery, useGetDoctorsQuery } = doctorApi

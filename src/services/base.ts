@@ -59,7 +59,7 @@ export const customBaseQuery: BaseQueryFn = async (args, api, extraOptions) => {
         handleNotification(api, result)
       }
     } catch (error) {
-      // eslint-disable-next-line no-console
+       
       console.log('Refresh token error:', error)
     }
   }

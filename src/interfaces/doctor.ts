@@ -27,7 +27,7 @@ export interface ILocation {
   coordinates: number[]
 }
 
-export interface IDoctor extends IUser {
+export interface IDoctor {
   id: string
   name: string
   specialties: string[]

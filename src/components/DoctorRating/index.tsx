@@ -4,14 +4,16 @@ const { Text } = Typography
 export interface DoctorRatingProps {
   average_rating: number
   review_count: number
+  showReviewCount?: boolean
+  showDetailCount?: boolean
 }
 
-export const DoctorRating = ({ average_rating, review_count }: DoctorRatingProps) => {
+export const DoctorRating = ({ average_rating, review_count, showReviewCount, showDetailCount }: DoctorRatingProps) => {
   return (
-    <div className='flex items-center'>
+    <div className='flex flex-col'>
       <Rate allowHalf value={average_rating} disabled />
-      <Text className='ml-2 text-lg'>{average_rating} / 5</Text>
-      <Text className='ml-2 text-gray-600'>({review_count} reviews)</Text>
+      {showDetailCount && <Text className='text-lg'>{average_rating} / 5</Text>}
+      {showReviewCount && <Text className='text-gray-600'>({review_count} reviews)</Text>}
     </div>
   )
 }

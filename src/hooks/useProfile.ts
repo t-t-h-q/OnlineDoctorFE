@@ -12,7 +12,7 @@ const useProfile = () => {
     try {
       await getProfile().unwrap()
     } catch (error) {
-      // eslint-disable-next-line no-console
+       
       console.log('Fetch profile error:', error)
     }
   }

@@ -4,9 +4,12 @@ import { combineReducers } from 'redux'
 // import { postsApi } from '@/services/api'
 import { authApi } from '@/services/auth'
 import { doctorApi } from '../services/doctor'
+import { configApi } from '../services/config'
 
 //  reducers
 import authReducer from '@/store/auth'
+import patientAppointmentReducer from '@/store/patient/appointment'
+import { patientApi } from '../services/patient'
 
 /**
  * Combines multiple reducers into a single reducer function.
@@ -20,9 +23,12 @@ const rootReducer = combineReducers({
   // [postsApi.reducerPath]: postsApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [doctorApi.reducerPath]: doctorApi.reducer,
+  [configApi.reducerPath]: configApi.reducer,
+  [patientApi.reducerPath]: patientApi.reducer,
 
   // reducers
   auth: authReducer,
+  patientAppointment: patientAppointmentReducer,
 })
 
 export default rootReducer

@@ -1,12 +1,11 @@
 import React from 'react'
 import { Typography } from 'antd'
-import FeatureCard from 'components/FeatureCard'
-import { Feature } from 'interfaces/home'
+import FeatureCard, { FeatureCardProps } from 'components/FeatureCard'
 import { faClock, faShieldAlt, faDollarSign } from '@fortawesome/free-solid-svg-icons'
 
 const { Title } = Typography
 
-const features: Feature[] = [
+const features: FeatureCardProps[] = [
   {
     icon: faClock,
     title: 'Tiết kiệm thời gian',
@@ -33,7 +32,7 @@ const FeaturesSection: React.FC = () => {
         </Title>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
           {features.map((feature) => (
-            <FeatureCard feature={feature} />
+            <FeatureCard {...feature} />
           ))}
         </div>
       </div>

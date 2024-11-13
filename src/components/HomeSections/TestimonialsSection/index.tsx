@@ -1,11 +1,10 @@
 import React from 'react'
 import { List, Typography } from 'antd'
-import TestimonialCard from 'components/TestimonialCard'
-import { Testimonial } from 'interfaces/home'
+import TestimonialCard, { TestimonialCardProps } from 'components/TestimonialCard'
 
 const { Title } = Typography
 
-const testimonials: Testimonial[] = [
+const testimonials: TestimonialCardProps[] = [
   {
     name: 'Nguyễn Văn X',
     comment:

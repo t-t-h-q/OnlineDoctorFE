@@ -8,7 +8,7 @@ const authenticatedPatientLoader = async () => {
   const roleId = get(storeApp, 'auth.currentUser.role.id', null)
   const isPatientAuthenticated = ERoles.PATIENT === roleId
 
-  if (!isPatientAuthenticated) {
+  if (isPatientAuthenticated) {
     return redirect('/login')
   }
 
