@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
-import { Form, Input, Select, Button } from 'antd'
+import { Form, Input, Select, Button, Rate } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faStethoscope, faLocationDot } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faStethoscope, faLocationDot, faStar } from '@fortawesome/free-solid-svg-icons'
 import { ISearchDoctorParams } from '@/interfaces/doctor'
 import { SPECIALTIES } from '@/constants/doctor'
 
@@ -17,11 +17,12 @@ const DoctorSearchForm: React.FC<DoctorSearchFormProps> = ({ onFinish, setSearch
   const specialty = Form.useWatch('specialty', form)
   const location = Form.useWatch('location', form)
   const name = Form.useWatch('name', form)
+  const rating = Form.useWatch('rating', form)
 
   // Check form value
   const isFormEmpty = useMemo(() => {
-    return !specialty && !location && (!name || name.trim() === '')
-  }, [specialty, location, name])
+    return !specialty && !location && (!name || name.trim() === '') && !rating
+  }, [specialty, location, name, rating])
 
   const handleReset = () => {
     form.resetFields()
@@ -31,6 +32,27 @@ const DoctorSearchForm: React.FC<DoctorSearchFormProps> = ({ onFinish, setSearch
   const handleSubmit = (values: ISearchDoctorParams) => {
     onFinish(values)
     setSearchParams(values)
+  }
+
+  const handleRatingChange = (value: number) => {
+    setSearchParams((prevParams) => ({
+      ...prevParams,
+      rating: value,
+    }))
+  }
+
+  const handleLocationChange = (value: string) => {
+    setSearchParams((prevParams) => ({
+      ...prevParams,
+      location: value,
+    }))
+  }
+
+  const handleNameChange = (value: string) => {
+    setSearchParams((prevParams) => ({
+      ...prevParams,
+      name: value,
+    }))
   }
 
   return (
@@ -66,6 +88,7 @@ const DoctorSearchForm: React.FC<DoctorSearchFormProps> = ({ onFinish, setSearch
             <Input
               placeholder='Enter Location'
               prefix={<FontAwesomeIcon icon={faLocationDot} className='text-gray-400' />}
+              onChange={(e) => handleLocationChange(e.target.value)}
             />
           </Form.Item>
 
@@ -73,7 +96,21 @@ const DoctorSearchForm: React.FC<DoctorSearchFormProps> = ({ onFinish, setSearch
             <Input
               placeholder='Search by Doctor Name'
               prefix={<FontAwesomeIcon icon={faSearch} className='text-gray-400' />}
+              onChange={(e) => handleNameChange(e.target.value)}
             />
+          </Form.Item>
+
+          <Form.Item
+            name='rating'
+            label={
+              <span className='text-gray-700 flex items-center gap-2'>
+                <FontAwesomeIcon icon={faStar} className='text-yellow-400' />
+                Minimum Rating
+              </span>
+            }
+            className='mb-0'
+          >
+            <Rate allowHalf onChange={handleRatingChange} />
           </Form.Item>
         </div>
 

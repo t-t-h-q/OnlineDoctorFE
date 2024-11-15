@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Rate, Table, Tag } from 'antd'
+import { Button, Rate, Table, Avatar } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarCheck, faStethoscope, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faStethoscope, faUser } from '@fortawesome/free-solid-svg-icons'
 import DoctorSearchForm from 'components/DoctorSearchForm'
-import Loading from 'components/commons/Loading'
 import { IDoctor, ISearchDoctorParams } from 'interfaces/doctor'
 import useSearchDoctor from '@/hooks/useSearchDoctor'
 import type { ColumnsType, TableProps } from 'antd/es/table'
@@ -21,6 +20,7 @@ const FindDoctors: React.FC = () => {
     specialty: undefined,
     location: undefined,
     name: undefined,
+    rating: undefined,
   })
 
   // Update doctors when data changes
@@ -33,60 +33,35 @@ const FindDoctors: React.FC = () => {
   // Column definitions
   const columns: ColumnsType<IDoctor> = [
     {
+      title: 'Avatar',
+      dataIndex: 'avatar',
+      key: 'avatar',
+      render: (avatar: string) => <Avatar src={avatar} />,
+    },
+    {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
+      sorter: true,
     },
     {
       title: 'Specialty',
       dataIndex: 'specialty',
       key: 'specialty',
-      filters: Array.from(new Set(doctors.map((d) => d.specialty))).map((specialty) => ({
-        text: specialty,
-        value: specialty,
-      })),
-      onFilter: (value, record) => record.specialty === value,
-      filterMultiple: true,
+      sorter: true,
     },
     {
       title: 'Rating',
       dataIndex: 'rating',
       key: 'rating',
       render: (rating: number) => <Rate disabled defaultValue={rating} />,
-      filters: [
-        { text: '5', value: 5 },
-        { text: '4', value: 4 },
-        { text: '3', value: 3 },
-        { text: '2', value: 2 },
-        { text: '1', value: 1 },
-      ],
-      onFilter: (value, record) => record.rating == Number(value),
-      filterMultiple: false,
-    },
-    {
-      title: 'Availability',
-      dataIndex: 'availability',
-      key: 'availability',
-      render: (availability: boolean) => (
-        <Tag
-          color={availability ? 'green' : 'red'}
-          className='mb-4 inline-flex items-center gap-1'
-          icon={<FontAwesomeIcon icon={faCalendarCheck} />}
-        >
-          {availability ? 'Available' : 'Not Available'}
-        </Tag>
-      ),
-      filters: [
-        { text: 'Available', value: true },
-        { text: 'Not Available', value: false },
-      ],
-      onFilter: (value, record) => record.availability === value,
-      filterMultiple: false,
+      sorter: true,
     },
     {
       title: 'Location',
       dataIndex: 'location',
       key: 'location',
+      sorter: true,
     },
     {
       title: 'Action',
@@ -114,15 +89,11 @@ const FindDoctors: React.FC = () => {
     navigate(path)
   }
 
-  // TODO: handle pagination, filters, sorter, extra in table
+  // TODO: handle pagination, filters, sorter, extra in table then call api and update data list
   // Table change handler
   const handleTableChange: TableProps<IDoctor>['onChange'] = (pagination, filters, sorter, extra) => {
     // eslint-disable-next-line no-console
     console.log('Table params:', { pagination, filters, sorter, extra }, searchParams)
-  }
-
-  if (isLoadingData || isFetching) {
-    return <Loading />
   }
 
   return (
@@ -142,6 +113,7 @@ const FindDoctors: React.FC = () => {
         dataSource={doctors}
         rowKey='id'
         onChange={handleTableChange}
+        loading={isLoadingData || isFetching}
         pagination={{
           position: ['bottomCenter'],
           current: 1,

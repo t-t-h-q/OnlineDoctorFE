@@ -18,6 +18,7 @@ export const generateFakeUsers = (count: number): IDoctor[] => {
 
   return Array.from({ length: count }, (_, index) => ({
     id: index + 1,
+    avatar: `https://via.placeholder.com/32`,
     name: `${firstNames[Math.floor(Math.random() * firstNames.length)]} ${
       lastNames[Math.floor(Math.random() * lastNames.length)]
     }`,

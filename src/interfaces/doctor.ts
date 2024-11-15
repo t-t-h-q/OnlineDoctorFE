@@ -1,5 +1,6 @@
 export interface IDoctor {
   id?: number
+  avatar?: string
   name: string
   specialty: string
   rating: number
@@ -14,6 +15,7 @@ export interface ISearchDoctorParams {
   specialty?: string
   location?: string
   name?: string
+  rating?: number
 }
 
 export interface ISearchDoctorResponse {
