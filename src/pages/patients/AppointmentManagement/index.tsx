@@ -4,7 +4,6 @@ import type { ColumnsType, TableProps } from 'antd/es/table'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil, faTrash, faEye } from '@fortawesome/free-solid-svg-icons'
 import useAppointmentsList from '@/hooks/useAppointmentsList'
-import Loading from '@/components/commons/Loading'
 import EditAppointmentModal, { EditAppointmentFormValues } from '@/components/Modal/EditAppointmentModal'
 import WarningModal from '@/components/Modal/WarningModal'
 import { STATUS_STYLES } from '@/constants/style'
@@ -72,17 +71,19 @@ const AppointmentPage: React.FC = () => {
       title: 'Doctor Name',
       dataIndex: 'doctorName',
       key: 'doctorName',
+      sorter: true,
     },
     {
       title: 'Date',
       dataIndex: 'date',
       key: 'date',
-      sorter: (a, b) => a.date.localeCompare(b.date),
+      sorter: true,
     },
     {
       title: 'Time',
       dataIndex: 'time',
       key: 'time',
+      sorter: true,
     },
     {
       title: 'Status',
@@ -92,6 +93,7 @@ const AppointmentPage: React.FC = () => {
         const style = STATUS_STYLES[status] || { bg: 'bg-gray-100', text: 'text-gray-800' }
         return <span className={`px-2 py-1 rounded-full text-sm ${style.bg} ${style.text}`}>{status}</span>
       },
+      sorter: true,
     },
     {
       title: 'Actions',
@@ -112,6 +114,7 @@ const AppointmentPage: React.FC = () => {
           </Button>
         </Space>
       ),
+      width: '300px',
     },
   ]
 
@@ -121,22 +124,18 @@ const AppointmentPage: React.FC = () => {
     // eslint-disable-next-line no-console
     console.log('Table params:', { pagination, filters, sorter, extra })
   }
-
-  if (isLoadingData || isFetching) {
-    return <Loading />
-  }
-
   return (
     <div className='p-6'>
       <h1 className='text-2xl font-bold mb-6'>Appointments Management</h1>
 
       <Table
-        tableLayout='fixed'
+        tableLayout='auto'
         columns={columns}
         dataSource={appointments}
         rowKey='id'
         className='shadow-lg rounded-lg'
         onChange={handleTableChange}
+        loading={isLoadingData || isFetching}
         pagination={{
           position: ['bottomCenter'],
           total: appointments.length,
