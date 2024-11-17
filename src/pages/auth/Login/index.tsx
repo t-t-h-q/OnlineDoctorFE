@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import type { FormProps } from 'antd'
 import { Button, Form, Input } from 'antd'
 import { useNavigate } from 'react-router-dom'
@@ -7,16 +7,27 @@ import AuthLayout from '@/layouts/AuthLayout'
 import { EMAIL_REGEX } from '@/constants/regex'
 import { ILoginRequest } from '@/interfaces/auth'
 import { COMMON_PATHS } from '@/constants/routeNames'
-import useLogin from './hooks/useLogin'
+import useLogin from '../../../hooks/useLogin'
+import { getRolePath } from '@/utils/rolePath'
+import { useAuth } from '../../../hooks/useAuth'
 
 const Login: React.FC = () => {
   const navigate = useNavigate()
   const { isLoginLoading, onLogin } = useLogin()
+  const { currentUser } = useAuth()
 
   const onFinish: FormProps<ILoginRequest>['onFinish'] = (values) => {
     const { email, password } = values
     onLogin({ email, password })
   }
+  // Redirect if user is already logged in
+  useEffect(() => {
+    if (currentUser?.role) {
+      const pathToRedirect = getRolePath(currentUser.role.name)
+      navigate(pathToRedirect)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser])
 
   return (
     <AuthLayout>

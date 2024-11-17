@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { EMAIL_REGEX } from '@/constants/regex'
 import { IRegisterRequest } from '@/interfaces/auth'
-import useRegister from './hooks/useRegister'
+import useRegister from '../../../hooks/useRegister'
 
 interface IRegisterForm extends IRegisterRequest {
   confirmPassword: string
