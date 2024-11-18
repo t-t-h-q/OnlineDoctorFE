@@ -3,12 +3,11 @@ import { combineReducers } from 'redux'
 //  services
 // import { postsApi } from '@/services/api'
 import { authApi } from '@/services/auth'
+import { doctorApi } from '../services/doctor'
+import { patientApi } from '@/services/patients'
 
 //  reducers
 import authReducer from '@/store/auth'
-import counterReducer from '@/store/counterSlice'
-import postsReducer from 'store/postsSlice'
-import { patientApi } from '@/services/patients'
 
 /**
  * Combines multiple reducers into a single reducer function.
@@ -22,11 +21,10 @@ const rootReducer = combineReducers({
   // [postsApi.reducerPath]: postsApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [patientApi.reducerPath]: patientApi.reducer,
+  [doctorApi.reducerPath]: doctorApi.reducer,
 
   // reducers
   auth: authReducer,
-  counter: counterReducer,
-  posts: postsReducer,
 })
 
 export default rootReducer
