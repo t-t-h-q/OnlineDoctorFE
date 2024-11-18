@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { authApi } from '@/services/auth'
 import rootReducer from './rootReducer'
 import { doctorApi } from '@/services/doctor'
+import { authApi } from '@/services/auth'
 
 /**
  * Configures the Redux store by combining the root reducer with the API reducer,

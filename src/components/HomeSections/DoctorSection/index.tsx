@@ -1,23 +1,24 @@
 import React from 'react'
 import { Typography } from 'antd'
 import DoctorCard from 'components/DoctorCard'
-import { IDoctor } from 'interfaces/doctor'
 
 const { Title } = Typography
 
-const doctors: IDoctor[] = [
+const doctors = [
   {
+    id: '1',
     name: 'Dr. Nguyễn Văn A',
-    specialty: 'Cardiology',
-    rating: 5,
-    image: '/doctor1.jpg',
+    specialties: 'Cardiology',
+    average_rating: 4.5,
+    avatar: '/doctor1.jpg',
     experience: '15 years of experience',
   },
   {
+    id: '2',
     name: 'Dr. Trần Thị B',
-    specialty: 'Dermatology',
-    rating: 4.5,
-    image: '/doctor2.jpg',
+    specialties: 'Dermatology',
+    average_rating: 3.5,
+    avatar: '/doctor2.jpg',
     experience: '10 years of experience',
   },
 ]
@@ -30,9 +31,13 @@ const DoctorSection: React.FC = () => {
           Our Medical Team
         </Title>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
-          {doctors.map((doctor, index) => (
-            <DoctorCard doctor={doctor} index={index} />
-          ))}
+          {doctors.length > 0 ? (
+            doctors.map((doctor, index) => <DoctorCard key={doctor.id} doctor={doctor} index={index} />)
+          ) : (
+            <div className='text-center col-span-full'>
+              <Typography.Text>No doctors available at the moment.</Typography.Text>
+            </div>
+          )}
         </div>
       </div>
     </section>

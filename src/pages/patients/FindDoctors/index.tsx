@@ -3,15 +3,17 @@ import { Button, Rate, Table, Avatar } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStethoscope, faUser } from '@fortawesome/free-solid-svg-icons'
 import DoctorSearchForm from 'components/DoctorSearchForm'
-import { IDoctor, ISearchDoctorParams } from 'interfaces/doctor'
+import { IDoctor, IRatings, ISearchDoctorParams, ISearchDoctorResponse } from 'interfaces/doctor'
 import useSearchDoctor from '@/hooks/useSearchDoctor'
 import type { ColumnsType, TableProps } from 'antd/es/table'
 import { useNavigate } from 'react-router-dom'
 import { DEFAULT_PAGE_SIZE } from '@/constants/pagination'
 
+type IDoctorTableRecord = Pick<IDoctor, 'id' | 'name' | 'specialties' | 'avatar' | 'location' | 'ratings'>
+
 const FindDoctors: React.FC = () => {
   const navigate = useNavigate()
-  const [doctors, setDoctors] = useState<IDoctor[]>([])
+  const [doctors, setDoctors] = useState<ISearchDoctorResponse>()
 
   const { fetchDoctorSearchList, data, isLoadingData, isFetching } = useSearchDoctor()
 
@@ -25,13 +27,13 @@ const FindDoctors: React.FC = () => {
 
   // Update doctors when data changes
   useEffect(() => {
-    if (data?.data) {
-      setDoctors(data.data)
+    if (data) {
+      setDoctors(data)
     }
   }, [data])
 
   // Column definitions
-  const columns: ColumnsType<IDoctor> = [
+  const columns: ColumnsType<IDoctorTableRecord> = [
     {
       title: 'Avatar',
       dataIndex: 'avatar',
@@ -45,22 +47,23 @@ const FindDoctors: React.FC = () => {
       sorter: true,
     },
     {
-      title: 'Specialty',
-      dataIndex: 'specialty',
-      key: 'specialty',
+      title: 'Specialties',
+      dataIndex: 'specialties',
+      key: 'specialties',
       sorter: true,
     },
     {
-      title: 'Rating',
-      dataIndex: 'rating',
-      key: 'rating',
-      render: (rating: number) => <Rate disabled defaultValue={rating} />,
+      title: 'Ratings',
+      dataIndex: 'ratings',
+      key: 'ratings',
+      render: (rating: IRatings) => <Rate disabled defaultValue={rating.average_rating} />,
       sorter: true,
     },
     {
       title: 'Location',
       dataIndex: 'location',
       key: 'location',
+      render: (location) => location.address,
       sorter: true,
     },
     {
@@ -84,14 +87,14 @@ const FindDoctors: React.FC = () => {
   }
 
   // Click to view profile
-  const handleOnclickViewProfile = (record: IDoctor) => {
+  const handleOnclickViewProfile = (record: IDoctorTableRecord) => {
     const path = `/doctors/detail/${record.id}`
     navigate(path)
   }
 
   // TODO: handle pagination, filters, sorter, extra in table then call api and update data list
   // Table change handler
-  const handleTableChange: TableProps<IDoctor>['onChange'] = (pagination, filters, sorter, extra) => {
+  const handleTableChange: TableProps<IDoctorTableRecord>['onChange'] = (pagination, filters, sorter, extra) => {
     // eslint-disable-next-line no-console
     console.log('Table params:', { pagination, filters, sorter, extra }, searchParams)
   }
@@ -110,14 +113,14 @@ const FindDoctors: React.FC = () => {
       {/* Table */}
       <Table
         columns={columns}
-        dataSource={doctors}
+        dataSource={doctors?.data}
         rowKey='id'
         onChange={handleTableChange}
         loading={isLoadingData || isFetching}
         pagination={{
           position: ['bottomCenter'],
           current: 1,
-          total: doctors.length,
+          total: doctors?.totalItems,
           pageSize: DEFAULT_PAGE_SIZE,
           showSizeChanger: true,
           showTotal: (total) => `Total ${total} doctors`,

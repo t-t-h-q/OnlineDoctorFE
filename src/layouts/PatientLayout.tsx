@@ -2,7 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { Layout } from 'antd'
 import DashboardHeader from 'components/DashboardHeader'
-import Sider from 'components/Sider/Sider'
+import Sider from '@/components/Sider'
 
 const PatientLayout: React.FC = () => {
   return (

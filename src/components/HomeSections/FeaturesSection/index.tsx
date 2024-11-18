@@ -37,8 +37,8 @@ const FeaturesSection: React.FC = () => {
           Why Choose Us?
         </Title>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
-          {features.map((feature) => (
-            <FeatureCard feature={feature} />
+          {features.map((feature, index) => (
+            <FeatureCard key={index} feature={feature} />
           ))}
         </div>
       </div>
