@@ -7,10 +7,12 @@ import { authApi } from '@/services/auth'
 
 interface IAuthState {
   currentUser: IUser | null
+  isProfileLoading: boolean
 }
 
 const initialState: IAuthState = {
   currentUser: null,
+  isProfileLoading: true,
 }
 
 export const authSlice = createSlice({
@@ -24,14 +26,26 @@ export const authSlice = createSlice({
     resetCredentials: () => initialState,
   },
   extraReducers: (builder) => {
+    // login
     builder.addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
       const data = get(action, 'payload.user', null)
       state.currentUser = data
     })
+
+    // get profile
+    builder.addMatcher(authApi.endpoints.getProfile.matchPending, (state) => {
+      state.isProfileLoading = true
+    })
     builder.addMatcher(authApi.endpoints.getProfile.matchFulfilled, (state, action) => {
       const data = get(action, 'payload', null)
       state.currentUser = data
+      state.isProfileLoading = false
     })
+    builder.addMatcher(authApi.endpoints.getProfile.matchRejected, (state) => {
+      state.isProfileLoading = false
+    })
+
+    // logout
     builder.addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
       state.currentUser = null
     })
