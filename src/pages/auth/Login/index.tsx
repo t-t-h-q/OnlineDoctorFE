@@ -23,7 +23,7 @@ const Login: React.FC = () => {
   }
   // Redirect if user is already logged in
   useEffect(() => {
-    if (currentUser?.role && (location.pathname === COMMON_PATHS.LOGIN.user)) {
+    if (currentUser?.role && location.pathname === COMMON_PATHS.LOGIN.user) {
       const pathToRedirect = getRolePath(currentUser.role.name)
       navigate(pathToRedirect)
     }
