@@ -23,7 +23,10 @@ export const authSlice = createSlice({
       ...state,
       ...action.payload,
     }),
-    resetCredentials: () => initialState,
+    resetCredentials: () => ({
+      ...initialState,
+      isProfileLoading: false,
+    }),
   },
   extraReducers: (builder) => {
     // login
