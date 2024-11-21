@@ -3,6 +3,7 @@ import type { FormProps } from 'antd'
 import { Button, DatePicker, Form, Input } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCcMastercard, faCcPaypal, faCcVisa } from '@fortawesome/free-brands-svg-icons'
+import { faMoneyCheckDollar } from '@fortawesome/free-solid-svg-icons'
 
 import { formatCurrency } from '@/utils/format'
 
@@ -16,7 +17,6 @@ export interface IPaymentRequest {
 const OnlinePayment = () => {
   const [price, setPrice] = useState<number>(0)
   const [saving, setSaving] = useState<number>(0)
-  const [pickup, setPickup] = useState<number>(0)
   const [tax, setTax] = useState<number>(0)
   const [total, setTotal] = useState<number>(0)
 
@@ -29,13 +29,12 @@ const OnlinePayment = () => {
   useEffect(() => {
     setPrice(1000)
     setSaving(100)
-    setPickup(100)
     setTax(100)
   }, [])
 
   useEffect(() => {
-    setTotal(price - saving + pickup + tax)
-  }, [price, saving, pickup, tax])
+    setTotal(price - saving + tax)
+  }, [price, saving, tax])
 
   return (
     <section className='bg-white py-8 antialiased dark:bg-gray-900 md:py-16'>
@@ -108,17 +107,22 @@ const OnlinePayment = () => {
                   rules={[
                     {
                       required: true,
-                      message: 'Please input your card number!',
+                      message: 'Please input your cvv!',
+                    },
+                    {
+                      pattern: /^[0-9]{3}$/,
+                      message: 'Please input your cvv correct!',
                     },
                   ]}
                 >
-                  <Input.Password size='large' placeholder='Enter your CVV' />
+                  <Input.Password minLength={3} maxLength={3} size='large' placeholder='Enter your CVV' />
                 </Form.Item>
               </div>
 
               <div className='flex gap-10 md:flex-row flex-col'>
                 <Button type='primary' htmlType='submit' block className='py-5 rounded-3xl'>
-                  Pay now
+                  <FontAwesomeIcon icon={faMoneyCheckDollar} className='h-4' />
+                  <span>Pay now</span>
                 </Button>
                 <Button variant='solid' color='danger' block className='py-5 rounded-3xl'>
                   Cancel
@@ -137,11 +141,6 @@ const OnlinePayment = () => {
                   <dl className='flex items-center justify-between gap-4'>
                     <dt className='text-base font-normal text-gray-500 dark:text-gray-400'>Savings</dt>
                     <dd className='text-base font-medium text-green-500'>-{formatCurrency(saving)}</dd>
-                  </dl>
-
-                  <dl className='flex items-center justify-between gap-4'>
-                    <dt className='text-base font-normal text-gray-500 dark:text-gray-400'>Store Pickup</dt>
-                    <dd className='text-base font-medium text-gray-900 dark:text-white'>{formatCurrency(pickup)}</dd>
                   </dl>
 
                   <dl className='flex items-center justify-between gap-4'>
