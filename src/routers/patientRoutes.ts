@@ -65,6 +65,13 @@ const patientRoutes = [
           return { Component: Settings.default }
         },
       },
+      {
+        path: 'medical-history',
+        async lazy() {
+          const MedicalHistory = await import('../pages/patients/MedicalHistory')
+          return { Component: MedicalHistory.default }
+        },
+      },
     ],
   },
 ]
