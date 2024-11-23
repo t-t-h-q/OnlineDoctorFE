@@ -28,8 +28,11 @@ const generateRandomDate = () => {
 
 export const appointments = Array.from({ length: 100 }, (_, index) => ({
   id: (index + 1).toString(),
-  date: generateRandomDate(),
-  time: generateRandomTime(),
+  appointment_date: generateRandomDate(),
+  time_slot: {
+    start_time: generateRandomTime(),
+    end_time: generateRandomTime(),
+  },
   doctorName: doctorNames[Math.floor(Math.random() * doctorNames.length)],
   status: statuses[Math.floor(Math.random() * statuses.length)],
 }))

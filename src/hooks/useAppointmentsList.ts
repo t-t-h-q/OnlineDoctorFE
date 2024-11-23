@@ -1,7 +1,9 @@
-import { useLazyGetAppointmentsListQuery } from '@/services/patients'
-
+import { appointments } from '@/fakeData/appointment'
+import { useLazyGetAppointmentsListQuery } from '@/services/appointmentsApi'
+const fakeAppointmentList = appointments
 const useAppointmentsList = () => {
-  const [getAppointmentsList, { data, isLoading: isLoadingData, isFetching }] = useLazyGetAppointmentsListQuery()
+  const [getAppointmentsList, { data = fakeAppointmentList, isLoading: isLoadingData, isFetching }] =
+    useLazyGetAppointmentsListQuery()
 
   const fetchAppointmentsList = async () => {
     try {

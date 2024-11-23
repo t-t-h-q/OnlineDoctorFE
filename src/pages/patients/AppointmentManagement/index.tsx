@@ -7,14 +7,7 @@ import useAppointmentsList from '@/hooks/useAppointmentsList'
 import EditAppointmentModal, { EditAppointmentFormValues } from '@/components/Modal/EditAppointmentModal'
 import WarningModal from '@/components/Modal/WarningModal'
 import { STATUS_STYLES } from '@/constants/style'
-
-export interface Appointment {
-  id: string
-  date: string
-  time: string
-  doctorName: string
-  status: string
-}
+import { Appointment } from '@/interfaces/appointment'
 
 const AppointmentPage: React.FC = () => {
   const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null)
@@ -52,7 +45,7 @@ const AppointmentPage: React.FC = () => {
     setIsDeleteModalVisible(true)
   }
 
-  // TODO: call api edit
+  // TODO: call api edit and show success alert
   const handleEditSubmit = async (values: EditAppointmentFormValues) => {
     // eslint-disable-next-line no-console
     console.log(values)
@@ -75,15 +68,22 @@ const AppointmentPage: React.FC = () => {
     },
     {
       title: 'Date',
-      dataIndex: 'date',
+      dataIndex: 'appointment_date',
       key: 'date',
       sorter: true,
     },
     {
       title: 'Time',
-      dataIndex: 'time',
+      dataIndex: 'time_slot',
       key: 'time',
       sorter: true,
+      render: (_, record) => (
+        <Space>
+          <span>{record.time_slot.start_time}</span>
+          <span>-</span>
+          <span>{record.time_slot.end_time}</span>
+        </Space>
+      ),
     },
     {
       title: 'Status',
