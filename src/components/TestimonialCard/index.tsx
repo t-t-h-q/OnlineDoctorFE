@@ -1,7 +1,7 @@
 import { Card, Rate, Typography, List } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faQuoteLeft } from '@fortawesome/free-solid-svg-icons'
-import { Testimonial } from 'interfaces/home'
+import { Testimonial } from 'components/HomeSections/TestimonialsSection'
 
 const { Text, Paragraph } = Typography
 

@@ -12,13 +12,13 @@ const HeroSection: React.FC = () => {
       <div className='container mx-auto px-4'>
         <div className='flex items-center gap-8'>
           <div className='flex-1'>
-            <Title level={1}>Chăm sóc sức khỏe trực tuyến</Title>
+            <Title level={1}>Online health care</Title>
             <Paragraph className='text-lg mb-8'>
-              Dịch vụ tư vấn y tế từ xa với đội ngũ bác sĩ chuyên nghiệp, sẵn sàng hỗ trợ bạn 24/7
+              Remote medical consultation service with a team of professional doctors, ready to assist you 24/7.
             </Paragraph>
             <Button type='primary' size='large' className='flex items-center'>
               <FontAwesomeIcon icon={faCalendarPlus} className='mr-2' />
-              Đặt lịch khám ngay
+              Book an appointment now.
             </Button>
           </div>
           <div className='flex-1'>

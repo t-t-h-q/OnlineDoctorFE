@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import rootReducer from './rootReducer'
+import { appointmentsApi } from '@/services/appointmentsApi'
 
 import { authApi } from '@/services/auth'
 import { doctorApi } from '@/services/doctor'
+import { authApi } from '@/services/auth'
 
 /**
  * Configures the Redux store by combining the root reducer with the API reducer,
@@ -13,10 +15,10 @@ import { doctorApi } from '@/services/doctor'
 
 const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware).concat(doctorApi.middleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(authApi.middleware).concat(doctorApi.middleware).concat(appointmentsApi.middleware),
 })
 
 export type RootState = ReturnType<typeof rootReducer>
 export type AppDispatch = typeof store.dispatch
-
 export default store
