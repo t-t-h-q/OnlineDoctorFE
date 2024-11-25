@@ -1,9 +1,12 @@
 import React from 'react'
 import { List, Typography } from 'antd'
 import TestimonialCard from 'components/TestimonialCard'
-import { Testimonial } from 'interfaces/home'
 
-const { Title } = Typography
+export interface Testimonial {
+  name: string
+  comment: string
+  rating: number
+}
 
 const testimonials: Testimonial[] = [
   {
@@ -19,12 +22,14 @@ const testimonials: Testimonial[] = [
   },
 ]
 
+const { Title } = Typography
+
 const TestimonialsSection: React.FC = () => {
   return (
     <section className='py-16 bg-white'>
       <div className='container mx-auto px-4'>
         <Title level={2} className='text-center mb-12'>
-          Đánh giá từ khách hàng
+          Customer Reviews
         </Title>
         <List
           grid={{

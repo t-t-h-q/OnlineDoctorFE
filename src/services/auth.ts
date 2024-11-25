@@ -1,8 +1,8 @@
-import { ILoginRequest, ILoginResponse, IRegisterRequest } from '@/interfaces/auth'
-import { customBaseQuery } from '@/services/base'
+import { ILoginRequest, ILoginResponse, IRegisterRequest } from 'interfaces/auth'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { IUser } from '@/interfaces/user'
 import { CATCH_TIME_SECONDS } from '@/constants/time'
+import { customBaseQuery } from 'services/base'
 
 export const authApi = createApi({
   baseQuery: customBaseQuery,

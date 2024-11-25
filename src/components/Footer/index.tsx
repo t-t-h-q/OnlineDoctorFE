@@ -52,20 +52,20 @@ interface FooterSection {
 const Footer: React.FC = () => {
   const footerSections: FooterSection[] = [
     {
-      title: 'Về chúng tôi',
+      title: 'About Us',
       content: {
         type: 'text',
-        value: 'Nền tảng telemedicine hàng đầu Việt Nam, kết nối bạn với các bác sĩ chuyên nghiệp',
+        value: 'The leading telemedicine platform in Vietnam, connecting you with professional doctors',
       },
     },
     {
-      title: 'Liên hệ',
+      title: 'Contact',
       content: {
         type: 'contact',
         items: [
           { icon: faPhone, text: '1900 xxxx' },
           { icon: faEnvelope, text: 'support@telemed.com' },
-          { icon: faMapMarkerAlt, text: 'TP.HCM, Việt Nam' },
+          { icon: faMapMarkerAlt, text: 'Ho Chi Minh City, Vietnam' },
         ],
       },
     },
@@ -74,15 +74,15 @@ const Footer: React.FC = () => {
       content: {
         type: 'links',
         items: [
-          { text: 'Về chúng tôi', href: '#' },
-          { text: 'Chính sách bảo mật', href: '#' },
-          { text: 'Điều khoản sử dụng', href: '#' },
+          { text: 'About Us', href: '#' },
+          { text: 'Privacy Policy', href: '#' },
+          { text: 'Terms of Use', href: '#' },
           { text: 'FAQ', href: '#' },
         ],
       },
     },
     {
-      title: 'Kết nối',
+      title: 'Connect',
       content: {
         type: 'social',
         items: [

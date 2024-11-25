@@ -25,6 +25,8 @@ export const DOCTOR_PATHS = {
 
 export const PATIENT_PATHS = {
   BASE: '/patients',
+  APPOINTMENT_BOOKING: '/patients/appointment-booking',
+  FIND_DOCTORS: '/patients/find-doctors',
   MANAGE_APPOINTMENTS: '/patients/manage-appointments',
   CHAT_VIDEO_CALL: '/patients/chat-video-call',
   ONLINE_PAYMENT: '/patients/online-payment',
