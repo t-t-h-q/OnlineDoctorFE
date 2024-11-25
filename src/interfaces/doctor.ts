@@ -1,5 +1,17 @@
 import { IUser } from './user'
 
+export interface ISearchDoctorParams {
+  page?: number
+  specialty?: string
+  location?: string
+  name?: string
+  rating?: number
+}
+
+export interface ISearchDoctorResponse {
+  data: Pick<IDoctor, 'id' | 'name' | 'specialties' | 'avatar' | 'ratings' | 'location'>[]
+  totalItems: number
+}
 export interface IGeneralInformation extends IUser {
   phone: string
   email: string

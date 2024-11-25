@@ -4,6 +4,7 @@ import { appointmentsApi } from '@/services/appointmentsApi'
 
 import { authApi } from '@/services/auth'
 import { doctorApi } from '@/services/doctor'
+import { authApi } from '@/services/auth'
 
 /**
  * Configures the Redux store by combining the root reducer with the API reducer,
@@ -20,5 +21,4 @@ const store = configureStore({
 
 export type RootState = ReturnType<typeof rootReducer>
 export type AppDispatch = typeof store.dispatch
-
 export default store
