@@ -44,8 +44,8 @@ const patientRoutes = [
           {
             path: ':id',
             async lazy() {
-              const AppointmentManagement = await import('../pages/patients/AppointmentDetail')
-              return { Component: AppointmentManagement.default }
+              const AppointmentDetail = await import('../pages/patients/AppointmentDetail/index')
+              return { Component: AppointmentDetail.default }
             },
           },
         ],
