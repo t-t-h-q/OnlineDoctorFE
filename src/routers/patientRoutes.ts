@@ -58,6 +58,13 @@ const patientRoutes = [
         },
       },
       {
+        path: 'consultation',
+        async lazy() {
+          const Consultation = await import('../pages/patients/Consultation/index')
+          return { Component: Consultation.default }
+        },
+      },
+      {
         path: 'settings',
         async lazy() {
           const Settings = await import('../pages/patients/Settings')
