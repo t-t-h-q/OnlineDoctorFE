@@ -2,6 +2,8 @@ import { combineReducers } from 'redux'
 
 //  services
 import { authApi } from '@/services/auth'
+import { doctorApi } from '../services/doctor'
+import { appointmentsApi } from '@/services/appointmentsApi'
 import { doctorApi } from '@/services/doctor'
 
 //  reducers
@@ -17,6 +19,7 @@ import authReducer from '@/store/auth'
 const rootReducer = combineReducers({
   // services
   [authApi.reducerPath]: authApi.reducer,
+  [appointmentsApi.reducerPath]: appointmentsApi.reducer,
   [doctorApi.reducerPath]: doctorApi.reducer,
 
   // reducers
