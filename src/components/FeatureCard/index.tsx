@@ -1,6 +1,6 @@
 import { Card, Typography } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Feature } from 'interfaces/home'
+import { Feature } from 'components/HomeSections/FeaturesSection'
 
 const { Title, Text } = Typography
 
