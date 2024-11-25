@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Card, Typography, Descriptions, Button } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import useAppointmentDetail from '@/hooks/useAppointmentDetail'
 import Loading from '@/components/commons/Loading'
+import { TimeSlot } from '@/interfaces/appointment'
+import { formatTimeSlot } from '@/utils/helpers'
+import { PATIENT_PATHS } from '@/constants/routeNames'
 
 const { Title, Text } = Typography
 
@@ -12,25 +15,27 @@ export interface IAppointmentDetail {
   id: string
   doctorName: string
   date: string
-  time: string
+  time: TimeSlot
   notes: string
-  prescription: {
-    fileName: string
-    fileUrl: string
+  prescription?: {
+    id: string
+    hasFile: boolean
   }
   speciality: string
   status: string
 }
 
 const AppointmentDetail: React.FC = () => {
-  const id = '1ac'
+  const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const [appointmentDetail, setAppointmentDetail] = useState<IAppointmentDetail>()
 
   const { fetchAppointmentDetail, data, isLoadingData, isFetching } = useAppointmentDetail()
 
   useEffect(() => {
-    fetchAppointmentDetail(id)
+    if (id) {
+      fetchAppointmentDetail(id)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -40,30 +45,32 @@ const AppointmentDetail: React.FC = () => {
     }
   }, [data])
 
+  const handleViewPrescription = () => {
+    navigate(`/patients/prescriptions/${id}`)
+  }
+
   const appointmentDetails = [
     { label: 'Doctor Name', value: appointmentDetail?.doctorName || '', strong: true },
     { label: 'Date', value: appointmentDetail?.date || '' },
-    { label: 'Time', value: appointmentDetail?.time || '' },
+    {
+      label: 'Time',
+      value: formatTimeSlot(appointmentDetail?.time),
+    },
     { label: 'Notes', value: appointmentDetail?.notes || '' },
     {
       label: 'Prescription',
       value: appointmentDetail?.prescription ? (
-        <Button
-          type='link'
-          className='p-0'
-          href={appointmentDetail.prescription.fileUrl}
-          download={appointmentDetail.prescription.fileName}
-        >
-          {appointmentDetail.prescription.fileName}
+        <Button type='link' className='p-0' onClick={handleViewPrescription}>
+          View Prescription
         </Button>
       ) : (
-        ''
+        'No Prescription'
       ),
     },
   ]
 
   const handleBack = () => {
-    navigate('/appointments')
+    navigate(PATIENT_PATHS.MANAGE_APPOINTMENTS)
   }
 
   return (

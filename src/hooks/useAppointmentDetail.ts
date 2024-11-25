@@ -6,11 +6,14 @@ const mockAppointmentDetail = {
   doctorName: 'BS. Nguyễn Văn An',
   speciality: 'Nội Khoa',
   date: '15/03/2024',
-  time: '10:30 Sáng',
+  time: {
+    start_time: '10:30',
+    end_time: '12:00',
+  },
   notes: 'Khám tổng quát định kỳ, kiểm tra huyết áp',
   prescription: {
-    fileName: 'DonThuoc.pdf',
-    fileUrl: '/path/to/prescription/DonThuoc.pdf',
+    id: '123abc',
+    hasFile: true,
   },
   status: 'Đã Hoàn Thành',
 }

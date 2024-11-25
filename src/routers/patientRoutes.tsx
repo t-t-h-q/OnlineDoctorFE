@@ -43,14 +43,13 @@ const patientRoutes = [
           return { Component: FindDoctors.default }
         },
       },
-
       {
         path: PATIENT_PATHS.MANAGE_APPOINTMENTS,
         children: [
           {
             path: '',
             async lazy() {
-              const AppointmentManagement = await import('../pages/patients/AppointmentManagement')
+              const AppointmentManagement = await import('../pages/patients/AppointmentManagement/index')
               return { Component: AppointmentManagement.default }
             },
           },
@@ -62,6 +61,13 @@ const patientRoutes = [
             },
           },
         ],
+      },
+      {
+        path: `${PATIENT_PATHS.PRESCRIPTION}/:id`,
+        async lazy() {
+          const PrescriptionDetail = await import('../pages/patients/PrescriptionDetail/index')
+          return { Component: PrescriptionDetail.default }
+        },
       },
       {
         path: PATIENT_PATHS.ONLINE_PAYMENT,
