@@ -1,20 +1,21 @@
 import React, { useEffect } from 'react'
 import type { FormProps } from 'antd'
 import { Button, Form, Input } from 'antd'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import AuthLayout from '@/layouts/AuthLayout'
 import { EMAIL_REGEX } from '@/constants/regex'
 import { ILoginRequest } from '@/interfaces/auth'
 import { COMMON_PATHS } from '@/constants/routeNames'
-import useLogin from '../../../hooks/useLogin'
+import useLogin from '@/hooks/useLogin'
 import { getRolePath } from '@/utils/rolePath'
-import { useAuth } from '../../../hooks/useAuth'
+import { useAuth } from '@/hooks/useAuth'
 
 const Login: React.FC = () => {
   const navigate = useNavigate()
   const { isLoginLoading, onLogin } = useLogin()
   const { currentUser } = useAuth()
+  const location = useLocation()
 
   const onFinish: FormProps<ILoginRequest>['onFinish'] = (values) => {
     const { email, password } = values
@@ -22,7 +23,7 @@ const Login: React.FC = () => {
   }
   // Redirect if user is already logged in
   useEffect(() => {
-    if (currentUser?.role) {
+    if (currentUser?.role && location.pathname === COMMON_PATHS.LOGIN.user) {
       const pathToRedirect = getRolePath(currentUser.role.name)
       navigate(pathToRedirect)
     }

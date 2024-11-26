@@ -6,10 +6,11 @@ import { PATIENT_PATHS } from '@/constants/routeNames'
 
 const authenticatedPatientLoader = async () => {
   const storeApp = store.getState()
-  const roleId = get(storeApp, 'auth.currentUser.role.id', null)
+  const roleId = get(storeApp, 'auth.currentUser.role.name', null)
   const isPatientAuthenticated = ERoles.PATIENT === roleId
+  const isProfileLoading = get(storeApp, 'auth.isProfileLoading', null)
 
-  if (!isPatientAuthenticated) {
+  if (!isProfileLoading && !isPatientAuthenticated) {
     return redirect('/login')
   }
 
