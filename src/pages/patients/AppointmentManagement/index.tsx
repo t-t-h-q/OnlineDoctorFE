@@ -8,8 +8,11 @@ import EditAppointmentModal, { EditAppointmentFormValues } from '@/components/Mo
 import WarningModal from '@/components/Modal/WarningModal'
 import { STATUS_STYLES } from '@/constants/style'
 import { Appointment } from '@/interfaces/appointment'
+import { useNavigate } from 'react-router-dom'
+import { PATIENT_PATHS } from '@/constants/routeNames'
 
 const AppointmentPage: React.FC = () => {
+  const navigate = useNavigate()
   const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null)
   const [isEditModalVisible, setIsEditModalVisible] = useState(false)
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
@@ -31,7 +34,7 @@ const AppointmentPage: React.FC = () => {
 
   const handleView = (record: Appointment) => {
     // Navigate to appointment detail page
-    setSelectedAppointment(record)
+    navigate(`${PATIENT_PATHS.MANAGE_APPOINTMENTS}/${record.id}`)
   }
 
   const handleEdit = (record: Appointment) => {

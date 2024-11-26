@@ -1,5 +1,5 @@
 import { appointments } from '@/fakeData/appointment'
-import { useLazyGetAppointmentsListQuery } from '@/services/appointmentsApi'
+import { useLazyGetAppointmentsListQuery } from '@/services/appointments'
 const fakeAppointmentList = appointments
 const useAppointmentsList = () => {
   const [getAppointmentsList, { data = fakeAppointmentList, isLoading: isLoadingData, isFetching }] =
@@ -10,7 +10,7 @@ const useAppointmentsList = () => {
       await getAppointmentsList().unwrap()
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.log('Fetch doctor error:', error)
+      console.log('Fetch appointment list error:', error)
     }
   }
   return { fetchAppointmentsList, data, isLoadingData, isFetching }

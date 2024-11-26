@@ -31,4 +31,5 @@ export const PATIENT_PATHS = {
   CHAT_VIDEO_CALL: '/patients/chat-video-call',
   ONLINE_PAYMENT: '/patients/online-payment',
   SETTINGS: '/patients/settings',
+  PRESCRIPTION: '/patients/prescriptions',
 }
