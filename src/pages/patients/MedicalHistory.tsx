@@ -1,4 +1,4 @@
-import { MedicalHistoryEntry } from "@/components/MedicalHistoryEntry"
+import { MedicalHistoryEntry } from '@/components/MedicalHistoryEntry'
 
 // This would typically come from an API or database
 const medicalHistoryData = [
@@ -27,10 +27,10 @@ const medicalHistoryData = [
 
 export const MedicalHistory = () => {
   return (
-    <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">Medical History</h1>
-        <div className="space-y-6">
+    <div className='min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8'>
+      <div className='max-w-3xl mx-auto'>
+        <h1 className='text-3xl font-bold text-gray-900 mb-8 text-center'>Medical History</h1>
+        <div className='space-y-6'>
           {medicalHistoryData.map((entry) => (
             <MedicalHistoryEntry
               key={entry.id}
