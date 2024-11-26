@@ -40,9 +40,9 @@ const ChatSection: React.FC<ChatSectionProps> = ({ consultationData }) => {
     <Sider width={300} className='bg-white rounded-lg p-4'>
       <div className='flex flex-col h-full'>
         <div className='flex-grow overflow-y-auto mb-4'>
-          {chatMessages.map((msg, index) => (
+          {chatMessages.map((msg) => (
             <div
-              key={index}
+              key={`${msg.sender}-${msg.timestamp.getTime()}`}
               className={`mb-2 relative group ${msg.sender === consultationData.patientId ? 'text-right' : 'text-left'}`}
             >
               <Tooltip placement='left' title={msg.timestamp.toLocaleTimeString()}>

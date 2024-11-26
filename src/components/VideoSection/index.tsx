@@ -19,6 +19,10 @@ const VideoSection: React.FC<VideoSectionProps> = ({ consultationData }) => {
   const localStreamRef = useRef<MediaStream | null>(null)
 
   const handleStartCall = async (): Promise<void> => {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      message.error('Your browser does not support video calls')
+      return
+    }
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: true,
@@ -34,7 +38,7 @@ const VideoSection: React.FC<VideoSectionProps> = ({ consultationData }) => {
       setIsCallActive(true)
       message.success('Call started successfully')
     } catch (error) {
-      message.error('Failed to start video call')
+      message.error('Unable to access camera or microphone')
       // eslint-disable-next-line no-console
       console.error('Error accessing media devices:', error)
     }
