@@ -1,8 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import rootReducer from './rootReducer'
 import { appointmentsApi } from '@/services/appointmentsApi'
-
-import { authApi } from '@/services/auth'
 import { doctorApi } from '@/services/doctor'
 import { authApi } from '@/services/auth'
 

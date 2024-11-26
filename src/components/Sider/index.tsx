@@ -61,7 +61,7 @@ const Sider: React.FC = () => {
       label: 'Find Doctors',
     },
     {
-      key: 'communication',
+      key: 'consultation',
       icon: <FontAwesomeIcon icon={faVideo} />,
       label: 'Communicate with Doctor',
     },

@@ -4,7 +4,6 @@ import { combineReducers } from 'redux'
 import { authApi } from '@/services/auth'
 import { doctorApi } from '../services/doctor'
 import { appointmentsApi } from '@/services/appointmentsApi'
-import { doctorApi } from '@/services/doctor'
 
 //  reducers
 import authReducer from '@/store/auth'
