@@ -27,7 +27,7 @@ const usePrescriptionDetail = () => {
       await getPrescriptionsDetail(id).unwrap()
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.log('Fetch profile error:', error)
+      console.log('Fetch prescriptions detail error:', error)
     }
   }
 

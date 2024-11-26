@@ -26,7 +26,7 @@ const useAppointmentDetail = () => {
       await getAppointmentsDetail(id).unwrap()
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.log('Fetch profile error:', error)
+      console.log('Fetch appointment detail error:', error)
     }
   }
 

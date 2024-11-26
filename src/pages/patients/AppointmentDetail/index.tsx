@@ -37,7 +37,7 @@ const AppointmentDetail: React.FC = () => {
       fetchAppointmentDetail(id)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [id])
 
   useEffect(() => {
     if (data) {
